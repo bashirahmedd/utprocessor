@@ -1,55 +1,47 @@
 #!/bin/bash
-pip install youtube-dl --upgrade
 
-source ./include_speech.sh     #google tts to read aloud text
+#includes
+source script_tts.sh
 
 #start new download
 script_input_video_id='input_video_id.txt'      #ids are loaded here 
 try_id_again='try_id_again.txt'                 #must be empty file in start
 backup_id='input_video_id_backup.txt'           #overwrite this file     
 if [ -s $script_input_video_id -a ! -s $try_id_again ];then
-   say "Initial state is good..."
+   echo "Initial state is good..." 
    cat $script_input_video_id > $backup_id      #backup intial ids
-   say "Input id list is backed up."
-   echo "backed-up to "$backup_id   
+   echo "Input ids are backed-up to $backup_id"
 else
-   say "Initial state is invalid, please check:"
-   say "Either file is empty:  $script_input_video_id"
-   say "or file is not empyt: $try_id_again"
+   echo "Initial state is invalid, please check:"    
+   echo "Either file is empty:  $script_input_video_id"
+   echo "or file is not empyt: $try_id_again"
    exit 1 
 fi
 
 baseUrl='https://www.youtube.com/watch?v='
-#target='./ytdown/'
-target='/home/naji/Downloads/temp/ytdown/'
+target='./ytdown/'
 counter=`date +%s`
 inc=1 
 filelines=`cat $script_input_video_id`
-task_tot=`cat $script_input_video_id|wc -l`
 
 slp_val="$((60*5))"       #in sec
 slp_inc=60                #increment by 60 sec  
-
 #echo "$slp_val"
 #exit 1
 
-say "Starting download of "$task_tot" tasks."
+echo "Starting download..."
 while : ; do
-    task_num=1
     for line in $filelines;do
         echo $line        
-        outputFile=$counter"_"$line"_%(title)s.%(ext)s"
+        outputFile=$counter"_%(title)s.%(ext)s"
         youtube-dl -f 22/18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
         if [ $? -ne 0 ];then
             echo "failed: $line"
             echo $line >>  $try_id_again
-            say "Unfortunately! task "$task_num" out of "$task_tot" has failed."
         else
             echo "success: $line"
-            say "Hooray! task "$task_num" out of "$task_tot" is successful." 
         fi
         counter="$(($counter+$inc))"
-        task_num="$(($task_num+1))"
     done
 
     if [ ! -s $try_id_again ];then
@@ -59,15 +51,9 @@ while : ; do
         cat /dev/null > $try_id_again
         filelines=`cat $script_input_video_id`
 
-        
-        slp_val="$(($slp_val+$slp_inc))"  #increment for next iteration
-        say "Runing next iteration in "$slp_val" seconds."
-
-        task_tot=`cat $script_input_video_id|wc -l`
-        say "This iteration has "$task_tot" tasks in total."
-
         sleep $slp_val
+        slp_val="$(($slp_val+$slp_inc))"  #increment for next iteration
     fi
 done
-say "Given batch is downloaded successfully."
+say "All the given ids downloaded successfully..."
 
