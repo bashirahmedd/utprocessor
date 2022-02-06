@@ -1,0 +1,380 @@
+Follow the following instructions:
+Command Line Application with Node.js
+
+https://developer.okta.com/blog/2019/06/18/command-line-app-with-nodejs
+
+
+
+Sample Json Input
+
+{
+  "div": {
+    "@class": "subsitute-drug",
+    "h3": {
+      "@class": "subsitute-drug-modal-heading",
+      "#text": "Explore alternate brands"
+    },
+    "div": [
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/agile-2-12955.html?source=Alternate Medicine block",
+              "#text": "Agile 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Wilshire"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 30.98%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.17.6/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/fernor-1-12962.html?source=Alternate Medicine block",
+              "#text": "Fernor 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Amarant"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 36.86%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.16.1/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/lintiz-1-12967.html?source=Alternate Medicine block",
+              "#text": "Lintiz 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Bosch"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 45.1%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.14/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/maxlax-1-12970.html?source=Alternate Medicine block",
+              "#text": "Maxlax 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Genix"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 49.02%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.13/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/micnic-1-12972.html?source=Alternate Medicine block",
+              "#text": "Micnic 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Zephyr Pharmatec"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 45.1%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.14/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/musidin-2-12985.html?source=Alternate Medicine block",
+              "#text": "Musidin 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Martin Dow"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 26.21%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.18.82/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/musrel-1-12989.html?source=Alternate Medicine block",
+              "#text": "Musrel 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Well  & Well"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 45.1%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.14/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/mylex-1-12991.html?source=Alternate Medicine block",
+              "#text": "Mylex 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Gillman"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 45.1%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.14/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/myodine-1-12994.html?source=Alternate Medicine block",
+              "#text": "Myodine 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Envoy"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 45.1%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.14/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/nazeden-1-12997.html?source=Alternate Medicine block",
+              "#text": "Nazeden 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Hygeia"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 67.45%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.8.3/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/nyer-1-13000.html?source=Alternate Medicine block",
+              "#text": "Nyer 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Medisure"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 72.55%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.7/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/taixa-1-13016.html?source=Alternate Medicine block",
+              "#text": "Taixa 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Noa Hemis"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 45.1%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.14/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/tazadin-1-13020.html?source=Alternate Medicine block",
+              "#text": "Tazadin 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Shawan"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 45.1%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.14/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/terlax-1-13022.html?source=Alternate Medicine block",
+              "#text": "Terlax 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Barrett"
+          },
+          {
+            "@style": "color:#00b50a; font-weight:bold",
+            "#text": "You save 18.68%"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.20.74/tablet"
+          }
+        ]
+      },
+      {
+        "@class": "box-drug",
+        "p": [
+          {
+            "@class": "product-name",
+            "a": {
+              "@href": "https://dawaai.pk/medicine/ternelin-4mg-tab-7765.html?source=Alternate Medicine block",
+              "#text": "Ternelin 4mg tablet"
+            }
+          },
+          {
+            "@class": "brand-name",
+            "#text": "Novartis"
+          },
+          {
+            "@style": "color:red;  font-weight:bold",
+            "#text": "1723.53% Pricey"
+          },
+          {
+            "@class": "price",
+            "#text": "Rs.465/tablet"
+          }
+        ]
+      }
+    ]
+  }
+}
