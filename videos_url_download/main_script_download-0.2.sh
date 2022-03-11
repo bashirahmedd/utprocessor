@@ -2,6 +2,7 @@
 pip install youtube-dl --upgrade
 
 source ./include_speech.sh     #google tts to read aloud text
+exit_signal='exit_signal.txt'
 
 #start new download
 script_input_video_id='input_video_id.txt'      #ids are loaded here 
@@ -35,12 +36,20 @@ slp_inc=60                #increment by 60 sec
 
 say "Starting download of "$task_tot" tasks."
 while : ; do
+    #check exit signal
+    if [[ -f "$exit_signal" ]]; then
+        say "Stop Called"
+        say "Please merge input and try_again ids files."
+        exit 0
+    fi
+
+    #processs task 
     task_num=1
     for line in $filelines;do
         echo $line        
         outputFile=$counter"_"$line"_%(title)s.%(ext)s"
         youtube-dl -f 22/18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
-        if [ $? -ne 0 ];then
+        if [[ $? -ne 0 ]];then
             echo "failed: $line"
             echo $line >>  $try_id_again
             say "Unfortunately! task "$task_num" out of "$task_tot" has failed."
@@ -52,7 +61,7 @@ while : ; do
         task_num="$(($task_num+1))"
     done
 
-    if [ ! -s $try_id_again ];then
+    if [[ ! -s $try_id_again ]];then
         break
     else
         cat $try_id_again > $script_input_video_id
