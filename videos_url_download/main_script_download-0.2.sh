@@ -1,6 +1,8 @@
 #!/bin/bash
 pip install youtube-dl --upgrade
 
+#set -euo pipefail 
+
 source ./include_speech.sh     #google tts to read aloud text
 exit_signal='exit_signal.txt'
 
