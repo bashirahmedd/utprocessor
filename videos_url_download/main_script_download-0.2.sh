@@ -49,7 +49,8 @@ while : ; do
     task_num=1
     for line in $filelines;do
         echo $line        
-        outputFile=$counter"_"$line"_%(title)s.%(ext)s"
+        #outputFile=$counter"_"$line"_%(title)s.%(ext)s"
+        outputFile=$counter"_%(title)s_"$line".%(ext)s"
         youtube-dl -f 22/18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
         if [[ $? -ne 0 ]];then
             echo "failed: $line"
