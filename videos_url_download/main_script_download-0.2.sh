@@ -8,7 +8,7 @@ exit_signal='exit_signal.txt'
 
 #start new download
 script_input_video_id='input_video_id.txt'      #ids are loaded here 
-try_id_again='try_id_again.txt'                 #must be empty file in start
+try_id_again='next_iteration.txt'                 #must be empty file in start
 backup_id='input_video_id_backup.txt'           #overwrite this file     
 if [ -s $script_input_video_id -a ! -s $try_id_again ];then
    say "Initial state is good..."

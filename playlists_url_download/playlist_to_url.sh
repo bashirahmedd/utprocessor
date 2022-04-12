@@ -23,7 +23,7 @@ for line in $filelines;do
     counter="$(($counter+$inc))"
     #printf -v frm_counter "%03d" $counter
     #outputFile=$counter"_queue.txt"
-    outputFile="queue_"$counter".txt"
+    outputFile="vds_"$counter"_"$line".txt"
     #echo $outputFile
     #youtube-dl -f 'best[ext=mp4]+best[height<=480]/best' -o $target$outputFile $line
     #youtube-dl -f 22/18/17 -o $target$outputFile $line
