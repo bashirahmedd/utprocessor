@@ -76,7 +76,7 @@ while : ; do
         say "Runing next iteration in "$slp_val" seconds."
 
         task_tot=`cat $script_input_video_id|wc -l`
-        say "This iteration has "$task_tot" tasks in total."
+        say "The next iteration has "$task_tot" tasks in total."
 
         sleep $slp_val
     fi
