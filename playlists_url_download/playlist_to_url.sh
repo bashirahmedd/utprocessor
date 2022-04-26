@@ -1,12 +1,13 @@
 #!/bin/bash
 
 #start new list download
-rm try_urls_again.txt
-filename='playlists_urls.txt'
+next_iteration='next_iteration.txt'                 #must be empty file in start
+#rm try_urls_again.txt
+playlists_urls='playlists_urls.txt'
 #cptobase='/home/bashir/Downloads'
 #target='./ytdown/'
-filelines=`cat $filename`
-#filelines=`head -1 $filename`
+filelines=`cat $playlists_urls`
+#filelines=`head -1 $playlists_urls`
 #echo $filelines
 #startNum=`date +%s`
 counter=`date +%s`
@@ -34,11 +35,19 @@ for line in $filelines;do
     if [ ! -s $outputFile ]
       then
         echo "failed: $line"
-        echo $line >>  try_urls_again.txt
+        #echo $line >>  try_urls_again.txt
+        echo $line >>  $next_iteration
         #break
     else
         echo "success: $line"
     fi
     #break
 done
+
+#if [[ ! -s $next_iteration ]];then
+    #break
+#else
+    #cat $next_iteration > $playlists_urls
+    #cat /dev/null > $next_iteration
+#fi
 
