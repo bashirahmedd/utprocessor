@@ -44,10 +44,10 @@ for line in $filelines;do
     #break
 done
 
-#if [[ ! -s $next_iteration ]];then
-    #break
-#else
-    #cat $next_iteration > $playlists_urls
-    #cat /dev/null > $next_iteration
-#fi
+if [[ ! -s $next_iteration ]];then
+    exit 0
+else
+    cat $next_iteration > $playlists_urls
+    cat /dev/null > $next_iteration
+fi
 
