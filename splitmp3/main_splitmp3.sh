@@ -12,34 +12,36 @@ else
     ls -a $base_dir | grep -i 'mp3' | sort > $file_names
 fi
 
-exit 0
+#exit 0
 #cd "$base_dir"
 while read line; do
     echo "$line"
     file_ext=`echo $line|tail -c 5`
-    echo "$file_ext"
+    #echo "$file_ext"
 
-    if [[ "$file_req_ext" == "$file_ext" ]]
+    if [[ "$file_req_ext" == "$file_ext" ]]; then
 
         dir_name=${line::-4}
 
         full_path="$base_dir/$dir_name"
         file_path="$base_dir/$line"
-        if [ -d "$full_path" ] 
-        then
+        
+        if [ -d "$full_path" ]; then 
             echo "Duplicate paths not allowed $full_path" 
             echo $line >>  $next_iteration
+            #rm -rf "$full_path"
         else
-            mp3splt -a -t 20.0 -o Lesson_01-@n -d "$full_path" "$file_path"
             echo "success: $line"
+            mp3splt -a -t 5.0 -o Lesson_01-@n -d "$full_path" "$file_path"            
         fi
     else
         echo "Invalid file type "
     fi
     #break 1
+
 done < $file_names
 
-if [[ ! -s $next_iteration ]];then
+if [[ ! -s $next_iteration ]]; then
     exit 0
 else
     cat $next_iteration > $file_names
