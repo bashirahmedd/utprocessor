@@ -4,7 +4,7 @@ file_req_ext=".mp3"
 next_iteration='next_iteration.txt'                 #must be empty file in start
 file_names='file_names.txt'
 #base_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/read_father_aud'
-base_dir='/home/naji/Downloads/temp/ytdown/audio_books_backup/qeeqwe'
+base_dir='/home/naji/Downloads/temp/ytdown/audio_books_backup/aDAS'
 
 if [ -s $file_names -a ! -s $next_iteration ];then
     echo "Processing previous entries: $file_names is not empty"

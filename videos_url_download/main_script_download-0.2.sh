@@ -60,6 +60,7 @@ while : ; do
             echo "success: $line"
             say "Hooray! task "$task_num" out of "$task_tot" is successful." 
         fi
+        sed -i '1d' "$script_input_video_id" 
         counter="$(($counter+$inc))"
         task_num="$(($task_num+1))"
     done
