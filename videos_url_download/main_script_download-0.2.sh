@@ -19,7 +19,7 @@ if [ -s $script_input_video_id -a ! -s $try_id_again ];then
    echo "backed-up to "$backup_id   
 else
    fn_say "Initial state is invalid, please check:"
-   fn_say "Either, this file is empty:  $script_input_video_id"
+   fn_say "Either, the file is empty:  $script_input_video_id"
    fn_say "or the file is not empty: $try_id_again"
    exit 1 
 fi
