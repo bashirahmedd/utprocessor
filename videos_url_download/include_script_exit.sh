@@ -1,9 +1,10 @@
 #!/bin/bash
+
 fn_exit_signal() 
-{ 
+{
     if [[ -f "$exit_signal_file" ]]; then
-        say "Stop Called"
-        say "Please do manual merge of input_id and try_again files."
+        fn_say "Stop Called"
+        fn_say "Please do manual merge of input_id and try_again files."
         exit 0
     fi    
 }
