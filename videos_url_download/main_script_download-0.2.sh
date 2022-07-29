@@ -54,8 +54,8 @@ while : ; do
         echo $line        
         #outputFile=$counter"_"$line"_%(title)s.%(ext)s"
         outputFile=$counter"_%(title)s_"$line".%(ext)s"
-        #youtube-dl --no-mtime -f 22/18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
-        youtube-dl --no-mtime -f 18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
+        youtube-dl --no-mtime -f 22/18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
+        #youtube-dl --no-mtime -f 18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
         
         if [[ $? -ne 0 ]];then
             echo "failed: $line"
