@@ -1,11 +1,21 @@
 #!/bin/bash
 
+# shutdown-now signal is higher in precedence
+# shutdown is lower in precedence
+
 fn_shutdown_signal() 
 {
-    if [[ -f "$shutdown_signal_file" ]]; then
-        fn_say "System shutdown Called"
+    msg_delay=5
+    if [[ -f "$shutdown_now_signal_file" ]]; then
+        fn_say "System shutdown called"
+        fn_say "System will proceed to shutdown immediately."
+        sleep $msg_delay
+        shutdown now
+        exit 0
+    elif [[ -f "$shutdown_signal_file" ]]; then
+        fn_say "System shutdown called"
         fn_say "System will proceed to shutdown in 120 seconds."
-        sleep 5
+        sleep $msg_delay
         shutdown +2 Shutting down in 2 minutes!
         exit 0
     fi    

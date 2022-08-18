@@ -5,11 +5,11 @@
 
 #includes are order specific
 source ./include/script_speech.sh     #google tts to read aloud text
+shutdown_now_signal_file='./signal/shutdown-now'
 shutdown_signal_file='./signal/shutdown'
 source ./include/script_shutdown.sh   
 exit_signal_file='./signal/exit'
 source ./include/script_exit.sh
-
 
 #start new download
 script_input_video_id='./input/video_id.txt'      #ids are loaded here 
