@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# shutdown-now signal is higher in precedence
-# shutdown is lower in precedence
+# shutdown-now signal is higher in precedence, shutdown-now is not recommended
+# shutdown is lower in precedence, shutdown is preferred
 
 fn_shutdown_signal() 
 {

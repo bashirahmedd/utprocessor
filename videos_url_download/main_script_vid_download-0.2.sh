@@ -35,7 +35,8 @@ filelines=`cat $script_input_video_id`
 task_tot=`cat $script_input_video_id|wc -l`
 
 slp_val="$((60*5))"       #in sec
-slp_inc=60                #increment by 60 sec  
+slp_inc=60                #increment by 60 sec
+session_dl_sz=0  
 
 fn_say "Starting download of "$task_tot" tasks."
 while : ; do
@@ -47,20 +48,27 @@ while : ; do
 
         echo $line        
 
-        outputFile=$counter"_%(title)s_"$line".%(ext)s"
-        youtube-dl --no-mtime -f 22/18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
+        out_file=$target$counter"_%(title)s_"$line".%(ext)s"
+        in_file="https://www.youtube.com/watch?v="$line
+
+        curr_file_sz=`youtube-dl -f 22/18/17 $in_file -j | jq .filesize`
+        youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
 
         if [[ $? -ne 0 ]];then
             echo "failed: $line"
             echo $line >>  $try_id_again
             fn_say "Unfortunately! task "$task_num" out of "$task_tot" has failed."
         else
+            if echo "$curr_file_sz" | grep -qE '^[0-9]+$'; then
+                session_dl_sz="$(($session_dl_sz+$curr_file_sz))"
+            fi
             echo "success: $line"
             fn_say "Hooray! task "$task_num" out of "$task_tot" is successful." 
         fi
         sed -i '1d' "$script_input_video_id" 
         counter="$(($counter+$inc))"
         task_num="$(($task_num+1))"
+        
     done
 
     if [[ ! -s $try_id_again ]];then
@@ -70,13 +78,13 @@ while : ; do
         cat /dev/null > $try_id_again
         filelines=`cat $script_input_video_id`
 
-        
         slp_val="$(($slp_val+$slp_inc))"  #increment for next iteration
         fn_say "Runing next iteration in "$slp_val" seconds."
 
         task_tot=`cat $script_input_video_id|wc -l`
         fn_say "The next iteration has "$task_tot" tasks in total."
 
+        fn_say "Download size in the session is "$session_dl_sz
         sleep $slp_val
     fi
 done
