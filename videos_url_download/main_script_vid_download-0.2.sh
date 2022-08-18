@@ -1,17 +1,20 @@
 #!/bin/bash
-pip install youtube-dl --upgrade
+#pip install youtube-dl --upgrade
 
 #set -euo pipefail 
 
-source ./include_script_speech.sh     #google tts to read aloud text
+#includes are sequence specific
+source ./include/script_speech.sh     #google tts to read aloud text
+shutdown_signal_file='./signal/shutdown'
+source ./include/script_shutdown.sh   
+exit_signal_file='./signal/exit'
+source ./include/script_exit.sh
 
-exit_signal_file='exit_signal.txt'
-source ./include_script_exit.sh
 
 #start new download
-script_input_video_id='input_video_id.txt'      #ids are loaded here 
-try_id_again='next_iteration.txt'                 #must be empty file in start
-backup_id='backup_input_video_id.txt'           #overwrite this file     
+script_input_video_id='./input/video_id.txt'      #ids are loaded here 
+try_id_again='./input/next_iteration.txt'                 #must be empty file in start
+backup_id='./input/backup_video_id.txt'           #overwrite this file     
 if [ -s $script_input_video_id -a ! -s $try_id_again ];then
    fn_say "Initial state is good..."
    cat $script_input_video_id > $backup_id      #backup intial ids
@@ -25,7 +28,6 @@ else
 fi
 
 baseUrl='https://www.youtube.com/watch?v='
-#target='./ytdown/'
 target='/home/naji/Downloads/temp/ytdown/'
 counter=`date +%s`
 inc=1 
@@ -50,6 +52,7 @@ while : ; do
     #processs task 
     task_num=1
     for line in $filelines;do
+        fn_shutdown_signal   
         fn_exit_signal
         echo $line        
         #outputFile=$counter"_"$line"_%(title)s.%(ext)s"
