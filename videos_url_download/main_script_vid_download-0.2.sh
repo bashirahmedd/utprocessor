@@ -3,7 +3,7 @@
 
 #set -euo pipefail 
 
-#includes are sequence specific
+#includes are order specific
 source ./include/script_speech.sh     #google tts to read aloud text
 shutdown_signal_file='./signal/shutdown'
 source ./include/script_shutdown.sh   
@@ -37,29 +37,19 @@ task_tot=`cat $script_input_video_id|wc -l`
 slp_val="$((60*5))"       #in sec
 slp_inc=60                #increment by 60 sec  
 
-#echo "$slp_val"
-#exit 1
-
 fn_say "Starting download of "$task_tot" tasks."
 while : ; do
-    #check exit signal
-    # if [[ -f "$exit_signal" ]]; then
-    #     fn_say "Stop Called"
-    #     fn_say "Please do manual merge of input_id and try_again files."
-    #     exit 0
-    # fi
-
-    #processs task 
+    #process a given download 
     task_num=1
     for line in $filelines;do
         fn_shutdown_signal   
         fn_exit_signal
+
         echo $line        
-        #outputFile=$counter"_"$line"_%(title)s.%(ext)s"
+
         outputFile=$counter"_%(title)s_"$line".%(ext)s"
         youtube-dl --no-mtime -f 22/18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
-        #youtube-dl --no-mtime -f 18/17 -o $target$outputFile "https://www.youtube.com/watch?v="$line
-        
+
         if [[ $? -ne 0 ]];then
             echo "failed: $line"
             echo $line >>  $try_id_again
