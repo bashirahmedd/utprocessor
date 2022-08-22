@@ -5,11 +5,9 @@
 
 #includes are order specific
 source ./include/script_speech.sh     #google tts to read aloud text
-shutdown_now_signal_file='./signal/shutdown-now'
-shutdown_signal_file='./signal/shutdown'
-source ./include/script_shutdown.sh   
-exit_signal_file='./signal/exit'
-source ./include/script_exit.sh
+source ./include/script_signal.sh
+session_dl_sz=0
+source ./include/script_util.sh
 
 #start new download
 script_input_video_id='./input/video_id.txt'      #ids are loaded here 
@@ -36,22 +34,19 @@ task_tot=`cat $script_input_video_id|wc -l`
 
 slp_val="$((60*5))"       #in sec
 slp_inc=60                #increment by 60 sec
-session_dl_sz=0  
+
 
 fn_say "Starting download of "$task_tot" tasks."
 while : ; do
     #process a given download 
     task_num=1
     for line in $filelines;do
-        fn_shutdown_signal   
-        fn_exit_signal
-
-        echo $line        
-
+        fn_process_signal   
+        
+        echo "Target file id: ""$line"        
         out_file=$target$counter"_%(title)s_"$line".%(ext)s"
         in_file="https://www.youtube.com/watch?v="$line
 
-        curr_file_sz=`youtube-dl -f 22/18/17 $in_file -j | jq .filesize`
         youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
 
         if [[ $? -ne 0 ]];then
@@ -59,9 +54,7 @@ while : ; do
             echo $line >>  $try_id_again
             fn_say "Unfortunately! task "$task_num" out of "$task_tot" has failed."
         else
-            if echo "$curr_file_sz" | grep -qE '^[0-9]+$'; then
-                session_dl_sz="$(($session_dl_sz+$curr_file_sz))"
-            fi
+            fn_process_fsize "$in_file" 
             echo "success: $line"
             fn_say "Hooray! task "$task_num" out of "$task_tot" is successful." 
         fi
