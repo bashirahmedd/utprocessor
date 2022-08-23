@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #start new list download
-next_iteration='next_iteration.txt'                 #must be empty file in start
+next_iteration='./input/next_iteration.txt'           #must be empty file in start
 #rm try_urls_again.txt
-playlists_urls='playlists_urls.txt'
+playlists_urls='./input/playlists_urls.txt'
 #cptobase='/home/bashir/Downloads'
 #target='./ytdown/'
 filelines=`cat $playlists_urls`
@@ -24,7 +24,7 @@ for line in $filelines;do
     counter="$(($counter+$inc))"
     #printf -v frm_counter "%03d" $counter
     #outputFile=$counter"_queue.txt"
-    outputFile="vds_"$counter"_"$line".txt"
+    outputFile="./output/vds_"$counter"_"$line".txt"
     #echo $outputFile
     #youtube-dl -f 'best[ext=mp4]+best[height<=480]/best' -o $target$outputFile $line
     #youtube-dl -f 22/18/17 -o $target$outputFile $line

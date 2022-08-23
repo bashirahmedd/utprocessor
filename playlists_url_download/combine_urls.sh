@@ -1,6 +1,7 @@
 #!/bin/bash
 
-rm all_merged_urls.txt
+all_merged_urls='./output/next_iteration.txt' 
+rm "$all_merged_urls"
 
 fileNames=`ls -rt *_result.txt`
 
