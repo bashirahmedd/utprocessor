@@ -10,12 +10,12 @@ session_dl_sz=0
 source ./include/script_util.sh
 
 #start new download
-script_input_video_id='./input/video_id.txt'      #ids are loaded here 
-try_id_again='./input/next_iteration.txt'                 #must be empty file in start
-backup_id='./input/backup_video_id.txt'           #overwrite this file     
+script_input_video_id='./input/video_id.txt'      # ids are loaded here 
+try_id_again='./input/next_iteration.txt'         # must be empty file in start
+backup_id='./input/backup_video_id.txt'           # overwrite this file     
 if [ -s $script_input_video_id -a ! -s $try_id_again ];then
    fn_say "Initial state is good..."
-   cat $script_input_video_id > $backup_id      #backup intial ids
+   cat $script_input_video_id > $backup_id        # backup intial ids
    fn_say "Input id list is backed up."
    echo "backed-up to "$backup_id   
 else
