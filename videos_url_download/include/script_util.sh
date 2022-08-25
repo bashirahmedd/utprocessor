@@ -11,3 +11,20 @@ fn_process_fsize()
     #     session_dl_sz="$(($session_dl_sz+$curr_file_sz))"
     # fi
 }
+
+fn_validate_file()
+{
+    target='/home/naji/Downloads/temp/ytdown/'
+    while read -r fid; do
+        echo "$fid"
+        fname=`ls "$target"|grep -i "$fid"".mp4$"`
+        echo $fname
+    done <<< "`cat ./input/backup_video_id.txt `"
+}
+
+fn_remove_partial()
+{
+    echo "fn_remove_partial"
+}
+
+#fn_validate_file

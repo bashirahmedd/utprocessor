@@ -10,5 +10,5 @@ fn_say()
 
 # Test Calls for the above functions
 #fn_say $*
-#fn_say "Hello Hello, how are you?"
+fn_say "Hello Hello, how are you?"
 #./include_speech.sh "EB is naughty boy. EB is bad boy, he is touching computer. He is disturbing others. Computer is angry. Computer will slap EB on the cheeks. "
