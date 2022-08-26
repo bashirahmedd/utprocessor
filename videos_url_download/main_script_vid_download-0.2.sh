@@ -12,10 +12,11 @@ source ./include/script_util.sh
 #start new download
 script_input_video_id='./input/video_id.txt'      # ids are loaded here 
 try_id_again='./input/next_iteration.txt'         # must be empty file in start
-backup_id='./input/backup_video_id.txt'           # overwrite this file     
+backup_id='./log/backup_video_id'           # overwrite this file     
+counter=`date +%s`
 if [ -s $script_input_video_id -a ! -s $try_id_again ];then
    fn_say "Initial state is good..."
-   cat $script_input_video_id > $backup_id        # backup intial ids
+   cat $script_input_video_id > "$backup_id""_""$counter"".log"        # backup intial ids
    fn_say "Input id list is backed up."
    echo "backed-up to "$backup_id   
 else
@@ -27,7 +28,7 @@ fi
 
 baseUrl='https://www.youtube.com/watch?v='
 target='/home/naji/Downloads/temp/ytdown/'
-counter=`date +%s`
+#counter=`date +%s`
 inc=1 
 filelines=`cat $script_input_video_id`
 task_tot=`cat $script_input_video_id|wc -l`
@@ -81,5 +82,7 @@ while : ; do
         sleep $slp_val
     fi
 done
+fn_say "Validating downloads"
+fn_validate_file "$target"
 fn_say "Given batch is downloaded successfully."
 
