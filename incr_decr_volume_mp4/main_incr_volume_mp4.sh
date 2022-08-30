@@ -37,18 +37,18 @@ while : ; do
                     echo "$in_file" >>  $failure_out
                 fi
             else
-                echo "Non Existing File: ""$fname"
+                fn_say "Non Existing File: ""$fname"
                 if [ -z "$fname" ]; then
                     echo "Process completed, exiting"
                     exit 0
                 fi
             fi
         else
-            echo "Either: Not found ""$out_dir".
-            echo "or: Not found ""$backup_dir".
+            fn_say "Either: Not found ""$out_dir".
+            fn_say "or: Not found ""$backup_dir".
         fi
     done <<< "`find  $in_dir -type f -not -path '*/out/*' -not -path '*/backup/*'`"
 
-    echo "Getting ready for next iteration".
+    fn_say "Getting ready for next iteration".
     sleep $slp_val
 done
