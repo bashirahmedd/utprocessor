@@ -25,21 +25,29 @@ while : ; do
         fn_process_signal   
 
         if [ -d "$out_dir" -a -d "$backup_dir" ]; then
-            in_file=$(basename "$fname")
-            #echo "$in_file"
-            ffmpeg -i "$fname" -filter:a "volume=3.00" "$out_dir""$in_file"
-            if [ $? -eq 0 ]; then            
-                sleep $slp_val
-                mv "$fname" "$backup_dir"          # move processed file to backup
-                echo "$in_file" >>  $success_out
+            if [ -f "$fname" ]; then
+                in_file=$(basename "$fname")
+                #echo "$in_file"
+                ffmpeg -y -i "$fname" -filter:a "volume=3.00" "$out_dir""$in_file"
+                if [ $? -eq 0 ]; then            
+                    sleep $slp_val
+                    mv "$fname" "$backup_dir"          # move processed file to backup
+                    echo "$in_file" >>  $success_out
+                else
+                    echo "$in_file" >>  $failure_out
+                fi
             else
-                echo "$in_file" >>  $failure_out
+                echo "Non Existing File: ""$fname"
+                if [ -z "$fname" ]; then
+                    echo "Process completed, exiting"
+                    exit 0
+                fi
             fi
         else
             echo "Either: Not found ""$out_dir".
             echo "or: Not found ""$backup_dir".
         fi
-    done <<< "`find  $in_dir -type f`"
+    done <<< "`find  $in_dir -type f -not -path '*/out/*' -not -path '*/backup/*'`"
 
     echo "Getting ready for next iteration".
     sleep $slp_val
