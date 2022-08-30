@@ -2,7 +2,7 @@
 
 fn_process_fsize() 
 {
-    echo "fn_process_fsize argument sent:""$1"
+    echo "fn_process_fsize :""$1"
 
     #curr_file_sz=`youtube-dl -f 22/18/17 $1 -j | jq .filesize`
     #echo "Target raw file size: ""$curr_file_sz"
@@ -15,9 +15,11 @@ fn_process_fsize()
 
 fn_validate_file()
 {
-    local validate_log="./log/validate_id.log"
-    local session_bkup_ids="./log/backup_video_id.log"
-    target="$1"
+    local epoc_id=`date +%s`
+    local validate_log="./log/""$epoc_id""_validate_id.log"
+    local session_bkup_ids="$2"
+    local target="$1"
+
     while read -r fid; do        
         fname=`ls "$target"|grep -i "$fid"".mp4$" 2> /dev/null`
         if [[ $? -ne 0 ]];then
@@ -25,7 +27,6 @@ fn_validate_file()
             echo "Please validate log, $validate_log"
         fi
     done <<< "`cat '$session_bkup_ids'`"
-    #done <<< "`cat ./log/backup_video_id.log`"
 }
 
 fn_remove_partial()
@@ -33,4 +34,4 @@ fn_remove_partial()
     echo "fn_remove_partial"
 }
 
-#fn_validate_file "/home/naji/Downloads/temp/ytdown/"
+#fn_validate_file "/home/naji/Downloads/temp/ytdown/" "/home/naji/Downloads/temp/ytdown/"     
