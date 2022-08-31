@@ -9,9 +9,9 @@ source ./include/script_signal.sh
 
 # vars for new download
 counter=`date +%s`
-in_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/math_1_gen'
-out_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/math_1_gen/out/'
-backup_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/math_1_gen/backup/'
+in_dir="/home/naji/bashir-workspace/kids_corner/420p/usb1/science_0_gen"
+out_dir="$in_dir""/out/"
+backup_dir="$in_dir""/backup/"
 failure_out="./log/""$counter""_failure_incr_volume_mp4.log"
 success_out="./log/""$counter""_success_incr_volume_mp4.log"
  
@@ -46,6 +46,7 @@ while : ; do
         else
             fn_say "Either: Not found ""$out_dir".
             fn_say "or: Not found ""$backup_dir".
+            exit -1
         fi
     done <<< "`find  $in_dir -type f -not -path '*/out/*' -not -path '*/backup/*'`"
 
