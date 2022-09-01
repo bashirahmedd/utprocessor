@@ -11,7 +11,7 @@ source ./include/script_signal.sh
 counter=`date +%s`
 base_files_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/math_1_gen'
 target_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/math_1_gen/'
-let slp_val="2+2"       #in sec
+let slp_val="2+2"               # in sec
 
 for fname in "$base_files_dir"/*; do 
     fn_process_signal   
