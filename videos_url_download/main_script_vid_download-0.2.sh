@@ -55,10 +55,12 @@ while : ; do
             echo "failed: $line"
             echo $line >>  $try_again_video_list
             fn_say "Unfortunately! task "$task_num" out of "$task_tot" has failed."
+            echo "-----------------------------"
         else
             fn_process_fsize "$in_file" 
             echo "success: $line"
             fn_say "Hooray! task "$task_num" out of "$task_tot" is successful." 
+            echo "-----------------------------"
         fi
         sed -i '1d' "$in_video_list" 
         counter="$(($counter+$inc))"

@@ -9,7 +9,7 @@ source ./include/script_signal.sh
 
 # vars for new download
 counter=`date +%s`
-in_dir="/home/naji/bashir-workspace/kids_corner/420p/usb1/science_0_gen"
+in_dir="/home/naji/bashir-workspace/kids_corner/420p/usb2/read_5_novel"
 out_dir="$in_dir""/out/"
 backup_dir="$in_dir""/backup/"
 failure_out="./log/""$counter""_failure_incr_volume_mp4.log"

@@ -10,7 +10,7 @@
 #youtube-dl https://www.youtube.com/watch?v=BWgyIxqMiXQ -j | jq .filesize
 #youtube-dl --no-mtime -f 22/18/17 https://www.youtube.com/watch?v=BWgyIxqMiXQ
 #youtube-dl 'http://www.snotr.com/video/13708/Drone_flying_through_fireworks' -j | jq .filesize_approx
-
+xdg-open ./output.mp4
 declare -a singals=(
                  "element 1" 
                  "element 2" 
