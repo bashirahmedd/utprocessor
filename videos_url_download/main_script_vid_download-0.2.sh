@@ -11,9 +11,9 @@ source ./include/script_util.sh
 
 # vars for new download
 counter=`date +%s`
-in_video_list='./input/video_id.txt'                 # ids are loaded here 
+in_video_list='./input/video_id.txt'                 # ids are loaded here
 try_again_video_list='./input/next_iteration.txt'    # must be empty file in start
-backup_id="./log/""$counter""_backup_video_id.log"   # overwrite this file     
+backup_id="./log/""$counter""_backup_video_id.log"   # overwrite this file
 
 # validate state
 if [ -s $in_video_list -a ! -s $try_again_video_list ];then
