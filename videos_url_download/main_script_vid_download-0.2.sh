@@ -39,6 +39,7 @@ slp_val="$((60*5))"       # in sec
 slp_inc=60                # increment by 60 sec
 
 fn_say "Starting download of "$task_tot" tasks."
+echo "-----------------------------"
 while : ; do
     # process a given download 
     task_num=1

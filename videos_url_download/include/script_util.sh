@@ -15,18 +15,20 @@ fn_process_fsize()
 
 fn_validate_file()
 {
+
     local epoc_id=`date +%s`
     local validate_log="./log/""$epoc_id""_validate_id.log"
     local session_bkup_ids="$2"
     local target="$1"
 
     while read -r fid; do        
+        echo $fid
         fname=`ls "$target"|grep -i "$fid"".mp4$" 2> /dev/null`
         if [[ $? -ne 0 ]];then
             echo $line >>  $validate_log
             echo "Please validate log, $validate_log"
         fi
-    done <<< "`cat '$session_bkup_ids'`"
+    done <<< "`cat $session_bkup_ids`"
 }
 
 fn_remove_partial()
@@ -34,4 +36,4 @@ fn_remove_partial()
     echo "fn_remove_partial"
 }
 
-#fn_validate_file "/home/naji/Downloads/temp/ytdown/" "/home/naji/Downloads/temp/ytdown/"     
+fn_validate_file "/home/naji/Downloads/temp/ytdown/" "./log/1664218266_backup_video_id.log"     
