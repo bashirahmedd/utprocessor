@@ -1,0 +1,16 @@
+# Id: humao.rest-client
+# Description: REST Client for Visual Studio Code
+# Version: 0.25.1
+# Publisher: Huachao Mao
+# VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+GET https://api.npms.io/v2/search?q=react
+
+###
+
+GET https://api.npms.io/v2/search HTTP/1.1
+content-type: application/json
+
+{
+    "q":"react"    
+}

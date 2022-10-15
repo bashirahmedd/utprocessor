@@ -35,6 +35,7 @@ for line in $filelines;do
     if [ ! -s $outputFile ]
       then
         echo "failed: $line"
+        rm "$outputFile"       #rm empty file
         #echo $line >>  try_urls_again.txt
         echo $line >>  $next_iteration
         #break
