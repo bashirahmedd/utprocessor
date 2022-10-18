@@ -2,10 +2,65 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "One",
+            "label": "YTUrlDownloader",
             "type": "shell",
-            "command": "echo Hello "
-          }
-          
+            "command": "bash main_script_vid_download-0.2.sh",
+            "options": {
+                "cwd": "${workspaceFolder}/videos_url_download"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+        {
+            "label": "YTUrlDownloader-Exit",
+            "type": "shell",
+            "command": "mv _exit exit",
+            "options": {
+                "cwd": "${workspaceFolder}/videos_url_download/signal"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+        {
+            "label": "YTUrlDownloader-UnExit",
+            "type": "shell",
+            "command": "mv exit _exit",
+            "options": {
+                "cwd": "${workspaceFolder}/videos_url_download/signal"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+        {
+            "label": "YTPlaylistDownloader",
+            "type": "shell",
+            "command": "bash main_playlist_to_url.sh",
+            "options": {
+                "cwd": "${workspaceFolder}/playlists_url_download"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+        {
+            "label": "YTPlaylistDownloader-rm-empty",
+            "type": "shell",
+            "command": "bash main_playlist_rm_empty.sh",
+            "options": {
+                "cwd": "${workspaceFolder}/playlists_url_download"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
     ]
 }
+
