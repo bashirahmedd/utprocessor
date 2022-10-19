@@ -61,6 +61,18 @@
                 "panel": "new"
               }
         },
+        {
+            "label": "IncreaseSoundLevel-mp4",
+            "type": "shell",
+            "command": "bash main_incr_volume_mp4.sh",
+            "options": {
+                "cwd": "${workspaceFolder}/incr_decr_volume_mp4"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+
     ]
 }
-
