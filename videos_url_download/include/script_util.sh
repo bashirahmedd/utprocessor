@@ -36,4 +36,4 @@ fn_remove_partial()
     echo "fn_remove_partial"
 }
 
-fn_validate_file "/home/naji/Downloads/temp/ytdown/" "./log/1664218266_backup_video_id.log"     
+#fn_validate_file "/home/naji/Downloads/temp/ytdown/" "./log/1664218266_backup_video_id.log"     
