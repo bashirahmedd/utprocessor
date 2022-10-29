@@ -6,7 +6,6 @@ if [ -f "$all_merged_urls" ];then
     rm "$all_merged_urls"
 fi
 
-#fileNames=`ls -rt *_result.txt`
 fileNames=`ls -rt ./output/vds_*.txt`
 
 for file in $fileNames;do
