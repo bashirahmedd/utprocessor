@@ -47,7 +47,7 @@ while : ; do
         fn_process_signal   
         
         echo "Target file id: ""$line"        
-        out_file=$target$counter"_%(title)s_"$line".%(ext)s"
+        out_file=$target$counter"_%(title)s_%(uploader)s_"$line".%(ext)s"
         in_file="https://www.youtube.com/watch?v="$line
 
         youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
