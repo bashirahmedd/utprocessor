@@ -3,8 +3,9 @@
 ext="$1"
 all_merged_urls='./output/all_merged_urls.txt' 
 
-if [ -z "$ext" ];then
-    exit
+echo "$ext"
+if [ ! -z "$ext" ];then
+    
     if [ -f "$all_merged_urls" ];then
         rm "$all_merged_urls"
     fi
