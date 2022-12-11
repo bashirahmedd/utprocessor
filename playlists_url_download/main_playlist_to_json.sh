@@ -11,7 +11,7 @@ base_url='https://www.youtube.com/watch?list='
 for line in $filelines;do
 
     counter="$(($counter+$inc))"
-    outputFile="./output/vds_"$counter"_"$line".json"  #tab separated
+    outputFile="./output/vds_json_"$counter"_"$line".json"  #tab separated
     #echo $outputFile
     echo $line
     echo 'Output = '$outputFile
