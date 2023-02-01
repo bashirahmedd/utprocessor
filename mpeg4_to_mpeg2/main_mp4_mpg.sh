@@ -28,7 +28,7 @@ while : ; do
             if [ -f "$fname" ]; then
                 in_file=$(basename "$fname")
                 echo "$in_file"
-               ffmpeg -i "$fname" -c:v mpeg2video -q:v 5 -c:a mp2 -f vob "$fname"".mpg"
+               ffmpeg -y -i "$fname" -c:v mpeg2video -q:v 5 -c:a mp2 -f vob "$fname"".mpg"
                 if [ $? -eq 0 ]; then            
                     sleep $slp_val
                     mv "$fname" "$backup_dir"          # move processed file to backup
