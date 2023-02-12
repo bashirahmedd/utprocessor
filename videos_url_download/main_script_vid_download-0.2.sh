@@ -65,7 +65,10 @@ while : ; do
         counter="$(($counter+$inc))"
         task_num="$(($task_num+1))"
         
-        echo "Video queue : "`cat $in_video_list|wc -l`" Failed try again : "`cat $try_again_video_list|wc -l`
+        vqueue=`cat $in_video_list|wc -l`
+        tagain=`cat $try_again_video_list|wc -l`
+        vpending="$(($vqueue+$tagain))"
+        echo "Video queue : "$vqueue" Failed try again : "$tagain" Pending Vids : "$vpending
         echo "-----------------------------"
     done
 
