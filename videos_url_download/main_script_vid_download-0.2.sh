@@ -68,7 +68,7 @@ while : ; do
         vqueue=`cat $in_video_list|wc -l`
         tagain=`cat $try_again_video_list|wc -l`
         vpending="$(($vqueue+$tagain))"
-        echo "Video queue : "$vqueue" Failed try again : "$tagain" Pending Vids : "$vpending
+        echo "Active queue : "$vqueue" Queued again : "$tagain" Pending Vids : "$vpending
         echo "-----------------------------"
     done
 
