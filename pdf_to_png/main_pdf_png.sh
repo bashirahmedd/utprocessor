@@ -9,7 +9,7 @@ source ./include/script_signal.sh
 
 # vars for new download
 counter=`date +%s`
-in_dir="/home/naji/bashir-workspace/kids_corner/books/pre_level_1/coloring/science_worksheet"
+in_dir="/home/naji/bashir-workspace/kids_corner/books/pre_level_1/coloring/english_worksheet"
 out_dir="$in_dir""/"
 backup_dir="$in_dir""/backup/"
 failure_out="./log/""$counter""_failure_pdf_png.log"
