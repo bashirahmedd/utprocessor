@@ -28,7 +28,10 @@ while : ; do
             if [ -f "$fname" ]; then
                 in_file=$(basename "$fname")
                 echo "$in_file"
-               ffmpeg -y -i "$fname" -c:v mpeg2video -q:v 5 -c:a mp2 -f vob "$fname"".mpg"
+                #ffmpeg -y -i "$fname"  -c:v mpeg2video -q:v 5 -c:a mp2 -f vob "$fname"".mpg"
+                #ffmpeg -y -i "$fname" -map 0:v:0 -map 0:a:1 -c:v mpeg2video -q:v 5 -c:a mp2 -f vob "$fname"".mpg"
+                ffmpeg -y -i "$fname" -map 0:0 -map 0:1 -c:v mpeg2video -q:v 5 -c:a mp2 "$fname"".mpg"
+
                 if [ $? -eq 0 ]; then            
                     sleep $slp_val
                     mv "$fname" "$backup_dir"          # move processed file to backup
@@ -48,7 +51,7 @@ while : ; do
             fn_say "or: Not found ""$backup_dir"
             exit -1
         fi
-    done <<< "`find  $in_dir -type f -not -path '*/out/*' -not -path '*/backup/*' -name '*.mp4'`"
+    done <<< "`find  $in_dir -type f -not -path '*/out/*' -not -path '*/backup/*' -name '*.mkv'`"
 
     fn_say "Getting ready for next iteration".
     sleep $slp_val
