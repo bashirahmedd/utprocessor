@@ -2,9 +2,21 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "YTUrlDownloader",
+            "label": "YTUrlDownloader 1",
             "type": "shell",
-            "command": "bash main_script_vid_download-0.2.sh",
+            "command": "bash main_script_vid_download-0.2.sh 1",
+            "options": {
+                "cwd": "${workspaceFolder}/videos_url_download"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+        {
+            "label": "YTUrlDownloader 2",
+            "type": "shell",
+            "command": "bash main_script_vid_download-0.2.sh 2",
             "options": {
                 "cwd": "${workspaceFolder}/videos_url_download"
             },

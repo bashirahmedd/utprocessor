@@ -9,10 +9,13 @@ source ./include/script_signal.sh
 session_dl_sz=0
 source ./include/script_util.sh
 
+#args
+batch="$1"
+
 # vars for new download
 counter=`date +%s`
-in_video_list='./input/video_id.txt'                 # ids are loaded here
-try_again_video_list='./input/next_iteration.txt'    # must be empty file in start
+in_video_list="./input/""$batch""_video_id.txt"                 # ids are loaded here
+try_again_video_list="./input/""$batch""_next_iteration.txt"    # must be empty file in start
 backup_id="./log/""$counter""_backup_video_id.log"   # overwrite this file
 
 # validate state
@@ -46,7 +49,7 @@ while : ; do
     for line in $filelines;do
         fn_process_signal   
         
-        echo "Target file id: ""$line"        
+        echo "Batch #:""$batch"" Target file id: ""$line"        
         out_file=$target$counter"_%(title)s_%(uploader)s_"$line".%(ext)s"
         in_file="https://www.youtube.com/watch?v="$line
 
