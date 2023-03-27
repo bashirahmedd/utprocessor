@@ -11,12 +11,14 @@ source ./include/script_util.sh
 
 #args
 batch="$1"
+fn_say "Loading Batch ""$batch"
 
 # vars for new download
 counter=`date +%s`
 in_video_list="./input/""$batch""_video_id.txt"                 # ids are loaded here
 try_again_video_list="./input/""$batch""_next_iteration.txt"    # must be empty file in start
 backup_id="./log/""$counter""_backup_video_id.log"   # overwrite this file
+separator="-----------------------------"
 
 # validate state
 if [ -s $in_video_list -a ! -s $try_again_video_list ];then
@@ -42,13 +44,19 @@ slp_val="$((60*5))"       # in sec
 slp_inc=60                # increment by 60 sec
 
 fn_say "Starting download of "$task_tot" tasks."
-echo "-----------------------------"
+echo "$separator"
 while : ; do
     # process a given download 
     task_num=1
     for line in $filelines;do
         fn_process_signal   
         
+        if ! grep -Fxq "$line" "$in_video_list"; then
+            fn_say " ID is removed, Not Found: ""$line"
+            echo "$separator"
+            continue
+        fi
+
         echo "Batch #:""$batch"" Target file id: ""$line"        
         out_file=$target$counter"_%(title)s_%(uploader)s_"$line".%(ext)s"
         in_file="https://www.youtube.com/watch?v="$line
@@ -72,7 +80,7 @@ while : ; do
         tagain=`cat $try_again_video_list|wc -l`
         vpending="$(($vqueue+$tagain))"
         echo "Active queue : "$vqueue" Queued again : "$tagain" Pending Vids : "$vpending
-        echo "-----------------------------"
+        echo "$separator"
     done
 
     if [[ ! -s $try_again_video_list ]];then
@@ -83,6 +91,7 @@ while : ; do
         filelines=`cat $in_video_list`
 
         slp_val="$(($slp_val+$slp_inc))"          # increment for next iteration
+        echo "Current Date and Time is: "`date +"%Y-%m-%d %T"` 
         fn_say "Runing next iteration in "$slp_val" seconds."
 
         task_tot=`cat $in_video_list|wc -l`
@@ -90,6 +99,7 @@ while : ; do
 
         fn_say "Download size in the session is "$session_dl_sz
         sleep $slp_val
+        echo "$separator"
     fi
 done
 fn_say "Validating downloads"

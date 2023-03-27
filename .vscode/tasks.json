@@ -50,6 +50,31 @@
               }
         },
         {
+            "label": "YTUrlDownloader-StopTTS",
+            "type": "shell",
+            "command": "mv _stoptts stoptts",
+            "options": {
+                "cwd": "${workspaceFolder}/videos_url_download/signal"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+        {
+            "label": "YTUrlDownloader-TTS",
+            "type": "shell",
+            "command": "mv stoptts _stoptts",
+            "options": {
+                "cwd": "${workspaceFolder}/videos_url_download/signal"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+              }
+        },
+
+        {
             "label": "YTPlaylistDownloader",
             "type": "shell",
             "command": "bash main_playlist_to_url.sh",

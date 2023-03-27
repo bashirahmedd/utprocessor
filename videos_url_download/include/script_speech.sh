@@ -2,9 +2,12 @@
 fn_say() 
 { 
     echo  $*
-    nc -zw1 google.com 443
-    if [ $? -eq 0 ];then
-        local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=$*&tl=en"; 
+    signal="./signal/stoptts"
+    if [[ ! -f "$signal" ]]; then
+        nc -zw1 google.com 443
+        if [ $? -eq 0 ];then
+            local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=$*&tl=en"; 
+        fi
     fi
 }
 
