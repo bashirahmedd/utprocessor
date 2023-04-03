@@ -1,0 +1,18 @@
+{
+  "name": "video_js_download",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "env YTDL_NO_UPDATE=1 node src/index.js downloadVideos 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "inquirer": "^9.1.4",
+    "uuid": "^9.0.0",
+    "ytdl-core": "^4.11.3"
+  }
+}
