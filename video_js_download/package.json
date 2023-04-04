@@ -12,6 +12,7 @@
   "type": "module",
   "dependencies": {
     "inquirer": "^9.1.4",
+    "shuffle-array": "^1.0.1",
     "uuid": "^9.0.0",
     "ytdl-core": "^4.11.3"
   }

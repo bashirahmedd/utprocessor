@@ -1,3 +1,5 @@
+nodejs rabbitmq 
+
 https://stackoverflow.com/questions/37732331/execute-bash-command-in-node-js-and-get-exit-code
 
 

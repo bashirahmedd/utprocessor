@@ -14,8 +14,12 @@ service="$1"
 batch="$2"
 echo "Running service: ""$service"" Batch ""$batch"
 
+separator="-----------------------------"
+slp_val="$((60*5))"       # in sec
+slp_inc=60                # increment by 60 sec
+
 json_chunk_file="./data/chunk""$batch"".json"
-echo "File being processed: ""$json_chunk_file"
+echo "File being processed: ""$json_chunk_file" 
 
 if [ -f "$json_chunk_file" ]; then
     obj_tot=`jq length $json_chunk_file`
@@ -31,10 +35,16 @@ if [ -f "$json_chunk_file" ]; then
         done
 
         obj_tot=`jq length $json_chunk_file`
-        if [[ $obj_tot -eq 0 ]];then
+        if [[ $obj_tot -eq 0 ]]; then
             break
+        else
+            echo "$separator"
+            echo "Current Date and Time is: "`date +"%Y-%m-%d %T"` 
+            echo "Runing next iteration in "$slp_val" seconds."
+            sleep $slp_val
+            slp_val="$(($slp_val+$slp_inc))"
         fi
     done
 else
-    echo "File not found: $rslv_app_nme"
-fi 
+    echo "File not found: $json_chunk_file"
+fi

@@ -15,15 +15,17 @@ const basePath = dirname(fileURLToPath(import.meta.url));
 
 //process args
 const service = process.argv[2]
-const batchId = process.argv[3]
+
 
 switch (service) {
     case "downloadVideos":
+        //service specific args        
+        const batchId = process.argv[3]
         LoadVideoData(ProcessVideos, batchId, basePath)
         break;
-
+    //case "someotherservice":
     default:
-        console.log("Given service is not found. Please give valid parms")
+        console.log("Given service is not found!")
         break;
 }
 
