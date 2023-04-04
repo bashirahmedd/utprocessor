@@ -2,7 +2,6 @@
 import fs from "fs"
 import ytdl from "ytdl-core"
 import readline from "readline"
-//import path from "path"
 
 //public 
 export default async function ProcessVideos(videos, jsonFile) {
@@ -77,16 +76,17 @@ async function updateJsonChunk(vidId, videos, jsonFile) {
     console.log('Updating json chunk file for ' + vidId)
     videos.splice(0, 1)
     console.log(videos)
+    
     shuffleArray(videos)
     console.log(videos)
     try {
         //fs.writeFileSync(jsonFile, JSON.stringify(videos), { encoding: 'utf8', flag: 'w' })
         await fs.writeFile(jsonFile, JSON.stringify(videos), function (err) {
             if (err) {
-              console.log(err);
+                console.log(err);
             }
             console.log("Json file updated...");
-          });
+        });
     } catch (error) {
         console.log("Something went wrong!", error);
     }

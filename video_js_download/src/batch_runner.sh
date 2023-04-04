@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Sample cmd service batchid
+# $./batch_runner.sh  downloadVideos 1
+
 #change the working directory
 cd /home/naji/bashir-workspace/github_bashirahmedd/utprocessor/video_js_download/src/
 
@@ -16,8 +19,10 @@ echo "File being processed: ""$json_chunk_file"
 
 if [ -f "$json_chunk_file" ]; then
     obj_tot=`jq length $json_chunk_file`
+
     while : ; do        
-        echo "New Iteration, Total downloads queued :""$obj_tot"        
+        echo "New Iteration, Total downloads queued :""$obj_tot" 
+               
         for ((cnt=1; cnt <= $obj_tot; cnt++)); do
             node ./index.js "$service" "$batch"
 
