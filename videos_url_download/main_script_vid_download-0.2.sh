@@ -51,7 +51,7 @@ while : ; do
     for line in $filelines;do
         fn_process_signal   
         
-        if ! grep -Fxq "$line" "$in_video_list"; then
+        if ! grep -Fxq -- "$line" "$in_video_list"; then
             fn_say " ID is removed, Not Found: ""$line"
             echo "$separator"
             continue
@@ -102,6 +102,10 @@ while : ; do
         echo "$separator"
     fi
 done
+
+#fix illegal char : in the file name
+rename 's/:/_/g' "$target""*.mp4"
+
 fn_say "Validating downloads"
 fn_validate_file "$target" "$backup_id" 
 fn_say "Given batch is downloaded successfully."
