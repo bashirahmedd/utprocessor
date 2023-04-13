@@ -58,10 +58,12 @@ while : ; do
         fi
 
         echo "Batch #:""$batch"" Target file id: ""$line"        
-        out_file=$target$counter"_%(title)s_%(uploader)s_"$line".%(ext)s"
+        #out_file=$target$counter"_%(title)s_%(uploader)s_"$line".%(ext)s"
+        out_file=$target"%(title)s_%(uploader)s_"$line".%(ext)s"
         in_file="https://www.youtube.com/watch?v="$line
 
-        youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
+        #youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
+        youtube-dl --no-mtime -r 4.2M -c -f 22/18/17 -o $out_file $in_file
 
         if [[ $? -ne 0 ]];then
             echo "failed: $line"
