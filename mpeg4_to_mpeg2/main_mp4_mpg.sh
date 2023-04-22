@@ -25,13 +25,6 @@ vid_files=$(find $src_dir -type f -name '*.mp4' | sort)
 # use newline as file separator (handle spaces in filenames)
 IFS=$'\n'
 
-# while : ; do
-#     #fn_process_signal   
-
-#     while read -r fname; do
-        # echo $fname
-        # fn_process_signal  
-
 for fname in ${vid_files}
 do
     #echo "${fname}"    
@@ -68,9 +61,3 @@ do
         exit -1
     fi
 done
-
-#     done <<< "`find  $src_dir -type f -name '*.mp4' | sort`"
-
-#     fn_say "Getting ready for next iteration".
-#     sleep $slp_val
-# done

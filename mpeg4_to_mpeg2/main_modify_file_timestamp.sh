@@ -17,10 +17,10 @@ for f in ${files}
 do
     # touch -t $(date -v -1m -r $(stat -f %m  "${f}") +%Y%m%d%H%M.%S) "${f}"
     #stat "${f}"
+    echo "${f}"
     epoc_val="$(($epoc_val - $day_sec))"
     touch  -am --date=@"$epoc_val"  "${f}"
     #stat "${f}" 
-    #echo "${epoc_val}"
-    #echo "${f}"
+    #echo "${epoc_val}"    
     #break
 done
