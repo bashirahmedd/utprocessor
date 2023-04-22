@@ -20,7 +20,7 @@ do
     epoc_val="$(($epoc_val - $day_sec))"
     touch  -am --date=@"$epoc_val"  "${f}"
     #stat "${f}" 
-    echo "${epoc_val}"
+    #echo "${epoc_val}"
     #echo "${f}"
     #break
 done
