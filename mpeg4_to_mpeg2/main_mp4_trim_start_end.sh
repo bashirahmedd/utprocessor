@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 trim_sec_start=7
 trim_sec_end=22
 
@@ -20,9 +19,8 @@ vid_files=$(find $src_dir -type f -name '*.mp4' | sort)
 # use newline as file separator (handle spaces in filenames)
 IFS=$'\n'
 
-for fname in ${vid_files}
-do
-    #echo "${fname}"    
+for fname in ${vid_files};do
+
     if [ -d "$out_dir" -a -d "$backup_dir" -a -d "$src_dir" ]; then
         if [ -f "$fname" ]; then
             echo "${fname}"    
@@ -32,7 +30,6 @@ do
             duration=$(echo "$vduration-$trim_sec_end" | bc -l)
             echo "$duration"
             #duration=$(printf '%.0f\n' $duration)
-            #echo "$duration"
             out_fname="$out_dir""${in_file%.*}"".mp4"
             ffmpeg -y -ss "$trim_sec_start" -to "$duration" -i "${fname}" -c copy "${out_fname}"
 
@@ -61,5 +58,4 @@ do
         fn_say "or: Not found ""$backup_dir"
         exit -1
     fi
-
 done

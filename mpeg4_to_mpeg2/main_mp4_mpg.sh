@@ -32,7 +32,7 @@ do
         if [ -f "$fname" ]; then
             in_file=$(basename "$fname")
             echo "$in_file"
-            out_fname="$fname"".mpg"
+            #out_fname="$fname"".mpg"
             out_fname="$out_dir""${in_file%.*}"".mpg"
             ffmpeg -y -i "$fname" -c:v mpeg2video -q:v 5 -c:a mp2 -f vob "$out_fname"
             if [ $? -eq 0 ]; then  

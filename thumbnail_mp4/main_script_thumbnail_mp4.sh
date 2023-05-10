@@ -9,8 +9,8 @@ source ./include/script_signal.sh
 
 # vars for new download
 counter=`date +%s`
-base_files_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/writing_1'
-target_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/writing_1/'
+base_files_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/science_fixie'
+target_dir='/home/naji/bashir-workspace/kids_corner/420p/usb1/science_fixie/'
 let slp_val="2+2"               # in sec
 
 for fname in "$base_files_dir"/*; do 
