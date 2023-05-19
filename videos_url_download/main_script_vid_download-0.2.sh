@@ -57,7 +57,7 @@ while : ; do
             continue
         fi
 
-        echo "Batch #:""$batch"" Target file id: ""$line"        
+        echo "Batch # ""$batch"" Target file id: ""$line"        
         #out_file=$target$counter"_%(title)s_%(uploader)s_"$line".%(ext)s"
         out_file=$target"%(title)s_%(uploader)s_"$line".%(ext)s"
         in_file="https://www.youtube.com/watch?v="$line
