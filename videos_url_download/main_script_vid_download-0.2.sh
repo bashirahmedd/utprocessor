@@ -11,7 +11,7 @@ source ./include/script_util.sh
 
 #args
 batch="$1"
-fn_say "Loading Batch ""$batch"
+fn_say "Loading Batch # ""$batch"
 
 # vars for new download
 counter=`date +%s`
