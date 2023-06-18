@@ -28,6 +28,13 @@ $jq --version
   ]
 
 #filter data based on the duration from the source file.
+
+$jq '.[]|select(.duration<600)|.id' test.json >> batch1.txt
+
+remove qoutes from  id string 
+$jq -r '.[]|select(.duration<600)|.id' test.json >> batch1.txt   
+
+
 $cat all_merged_urls.txt |jq '.[]|select(.duration<1800)'> all_merged_urls_lessthan30min.tx
 $cat vds_sem00rzDxEOarQFcS.json|jq '.[]|select(.duration<600)'
 $cat vds_sem00rzDxEOarQFcS.json|jq '.[]|select(.duration<600)'>> vds_sem00rzDxEOarQFcS_lessthan10min.json 
@@ -37,3 +44,7 @@ $cat vds_sem00rzDxEOarQFcS_lessthan10min.json |jq '.|length'
 $cat all_merged_urls.txt |jq '.|length'
 97
 $cat vds_sem00rzDxEOarQFcS_lessthan10min.json |jq '.[]|.id+"\t"+.title' >  vds_sem00rzDxEOarQFcS_lessthan10min.tsv
+
+
+detailed information on each episode of the playlist
+$ youtube-dl --no-call-home --dump-json https://www.youtube.com/playlist?list=PLI6jYYEI0TDosbAsew3Iauk6n_lCqXjAb | jq >> test.json

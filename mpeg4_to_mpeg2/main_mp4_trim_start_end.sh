@@ -1,7 +1,7 @@
 #!/bin/bash
 
-trim_sec_start=7
-trim_sec_end=22
+trim_sec_start=0
+trim_sec_end=60
 
 in_dir="/home/naji/Downloads/temp/ytdown/process/temp"
 out_dir="$in_dir""/"

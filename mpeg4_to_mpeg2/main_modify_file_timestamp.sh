@@ -2,7 +2,7 @@
 
 # path to the usb folders to modify time stamp of the files
 
-paths=("/media/naji/MediaStick/Kids_vid_1" "/media/naji/MediaStick/Kids_vid_2")
+paths=("/media/naji/MediaStick/Kids_vid_1" "/media/naji/MediaStick/kids_ur" "/media/naji/MediaStick/Kids_vid_2")
 
 for path in ${paths[@]}; do
 
