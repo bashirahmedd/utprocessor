@@ -8,4 +8,4 @@ src_nme="PLF_XMn-l0vPS5vLAaL1f73z2HwSNZ1vZy"
 src_file="$src_dir""$src_nme"".json"
 
 #up limit in seconds
-jq -r '.[]|select(.duration<600)|.id' "$src_file" >> "$src_dir""$src_nme"".txt"   
+jq -r '.[]|select(.duration<600)|.id' "$src_file" > "$src_dir""$src_nme"".txt"   
