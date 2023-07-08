@@ -8,4 +8,4 @@ while read -r fname; do
     id="${fname:(-17)}"  
     id="${id:0:11}"  
     echo "$id"  
-done <<< "`find  $in_dir -type f`"
+done <<< "`find  "$in_dir" -type f`"

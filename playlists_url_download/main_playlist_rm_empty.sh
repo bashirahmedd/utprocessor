@@ -9,4 +9,4 @@ while read -r fname; do
         echo "$fname"
         rm "$fname"
     fi
-done <<< "`find  $in_dir -type f `"
+done <<< "`find  "$in_dir" -type f `"

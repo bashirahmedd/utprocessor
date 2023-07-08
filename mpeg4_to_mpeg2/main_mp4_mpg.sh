@@ -21,7 +21,7 @@ let slp_val="2+2+2"       #in sec
 echo "reading from path: $in_dir"
 
 # find specific files
-vid_files=$(find $src_dir -type f -name '*.mp4' | sort)
+vid_files=$(find "$src_dir" -type f -name '*.mp4' | sort)
 # use newline as file separator (handle spaces in filenames)
 IFS=$'\n'
 

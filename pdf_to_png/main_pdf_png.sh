@@ -48,7 +48,7 @@ while : ; do
             fn_say "or: Not found ""$backup_dir"
             exit -1
         fi
-    done <<< "`find  $in_dir -type f -not -path '*/out/*' -not -path '*/backup/*' -name '*.pdf'`"
+    done <<< "`find  "$in_dir" -type f -not -path '*/out/*' -not -path '*/backup/*' -name '*.pdf'`"
 
     fn_say "Getting ready for next iteration".
     sleep $slp_val

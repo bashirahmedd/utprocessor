@@ -11,7 +11,7 @@ ffmpeg -f concat  -safe 0 -i join_video.txt -c copy output8.mp4
 
 # while read -r fname; do
 #     echo $fname >> mylist.txt
-# done <<< "`find  $in_dir -type f -name  '*.mp4' -printf '%f\t%p\n'`"
+# done <<< "`find  "$in_dir" -type f -name  '*.mp4' -printf '%f\t%p\n'`"
 
 #find . -type f -name '*.mp4' -printf '%f\t%p\n' | sort -k1 | cut -d$'\t' -f2
 # https://www.bannerbear.com/blog/how-to-merge-video-files-using-ffmpeg/

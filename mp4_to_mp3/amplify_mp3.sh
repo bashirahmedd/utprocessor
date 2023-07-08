@@ -58,7 +58,7 @@ while : ; do
             fn_say "or: Not found ""$backup_dir"
             exit -1
         fi
-    done <<< "`find  $src_dir -type f -name '*.mp3' | sort`"
+    done <<< "`find  "$src_dir" -type f -name '*.mp3' | sort`"
 
     fn_say "Getting ready for next iteration".
     sleep $slp_val
