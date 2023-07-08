@@ -12,8 +12,8 @@ counter=`date +%s`
 in_dir="/home/naji/Downloads/temp/ytdown/process/temp"
 out_dir="$in_dir""/"
 backup_dir="$in_dir""/backup/"
-#src_dir="${in_dir}""/input/"                              #relative path
-src_dir='/media/naji/My Passport/HOME/BB/bb_faiza/Refined_Collection/'    #absolute path
+src_dir="${in_dir}""/input/"                              #relative path
+#src_dir='/media/naji/My Passport/HOME/BB/Refined_Collection/'    #absolute path
 
 #reduce_pct="30"
 reduce_pct="40"
