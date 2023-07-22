@@ -30,14 +30,17 @@ IFS=$'\n'
 
 for fname in ${vid_files}
 do
-    #echo "${fname}"    
+    # echo "${fname}"        
     if [ -d "$out_dir" -a -d "$backup_dir" -a -d "$src_dir" ]; then
         if [ -f "$fname" ]; then
             in_file=$(basename "$fname")
             echo "$in_file"
-            #out_fname="$fname"".mpg"       
-            vid_found=$(find "$search_dir" -type f -name "$in_file""*" )
-            echo "$vid_found"
+            quote_in_file=$(printf '%q' "$in_file")
+            
+            #out_fname="$fname"".mpg"                   
+            vid_found=$(find "$search_dir" -type f -name "$quote_in_file""*" )
+            #echo "$vid_found"
+            
             if [ -f "$vid_found" ]; then
                 cp "$vid_found" "$out_dir"  
                 mv "$fname" "$backup_dir"          # move processed file to backup

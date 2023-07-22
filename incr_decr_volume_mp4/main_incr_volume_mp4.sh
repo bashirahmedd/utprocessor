@@ -37,8 +37,14 @@ do
     if [ -d "$out_dir" -a -d "$backup_dir" -a -d "$src_dir" ]; then
         if [ -f "$fname" ]; then
             in_file=$(basename "$fname")
+            quote_in_file=$(printf '%q' "$in_file")  #linux escape file name to find
             echo "$in_file"
+            echo "$quote_in_file"
+            
             out_fname="$out_dir""${in_file%.*}""_a3.mp4"
+            input_fname="$src_dir""$quote_in_file"
+            #echo "$input_fname"
+            #continue
             ffmpeg -y -i "$fname" -filter:a "volume=3.00" "$out_fname"
             if [ $? -eq 0 ]; then            
                 sleep $slp_val
