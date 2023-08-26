@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import got from 'got';
-import open, { openApp, apps } from 'open';
+import launch_browser from './services/launch_browser.mjs';
 
 
 const url = 'https://geo.craigslist.org/iso/ca';
@@ -12,21 +12,13 @@ try {
 
     $('ul.geo-site-list a').each((index, element) => {
         const attr = $(element).attr('href');
-        (async () => {
-            try {
-                console.log(index);
-                if(index < 1){
-                    await open(attr);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        })();
+        launch_browser(index, attr);
     });
 } catch (error) {
     console.log(error);
     console.error();
 }
+
 
 
 /* links.push({
