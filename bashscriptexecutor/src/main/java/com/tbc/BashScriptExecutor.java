@@ -27,8 +27,8 @@ public class BashScriptExecutor extends JFrame {
         setLocationRelativeTo(null);
 
         // Create buttons
-        JButton resetBtn = new JButton("Reset Script");
-        JButton unzipBtn = new JButton("Unzip Script");
+        JButton resetBtn = new JButton("Reset");
+        JButton unzipBtn = new JButton("Unzip");
 
         // Add action listeners to the buttons
         resetBtn.addActionListener(new ActionListener() {
