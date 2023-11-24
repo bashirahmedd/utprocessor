@@ -18,15 +18,15 @@ export default async function ProcessVideos(videos, jsonFile) {
     const { id, title, uploader, ...rest } = videos[0]; //get the first item
 
     try {
+        console.log(separator)
+        console.log(`Target Id: ${id}`)
+        console.log(`Title: ${title}`)
+
         const info = await ytdl.getInfo(id);
         const choosenFormat = ytdl.chooseFormat(info.formats, { quality: [17, 18, 22], filter: 'videoandaudio' });
 
         let outFile = `${target}${counter}_${title}_${uploader}_${id}.mp4`
         let inFile = `${baseUrl}${id}`
-
-        console.log(separator)
-        console.log(`Target Id: ${id}`)
-        console.log(`Title: ${title}`)
 
         let starttime;
         const video = ytdl(inFile, { filter: format => format.container === 'mp4', format: choosenFormat });

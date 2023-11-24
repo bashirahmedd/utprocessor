@@ -2,12 +2,12 @@ import React from 'react'
 
 const TestQuestion = ({ question }) => {
     //debugger;
-    console.log(question);
+    //console.log(question);
     if (typeof (question) !== 'undefined' && question != null) {
         console.log('Not Undefined and Not Null');        
     } else {
         console.log('Undefined or Null');
-        return (<div>Question not found, going beyond limit.</div>);
+        return (<div>Question not found, going beyond data limit.</div>);
     }
 
     return (

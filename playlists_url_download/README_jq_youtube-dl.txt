@@ -34,6 +34,9 @@ $jq '.[]|select(.duration<600)|.id' test.json >> batch1.txt
 remove qoutes from  id string 
 $jq -r '.[]|select(.duration<600)|.id' test.json >> batch1.txt   
 
+to get all ids of the videos
+$jq -r '.[]|.id' PLI6jYYEI0TDqmDJv8zG9Zg7TkXk-atjht.json
+$jq -r '.[]|.id' PLI6jYYEI0TDqmDJv8zG9Zg7TkXk-atjht.json >> PLI6jYYEI0TDqmDJv8zG9Zg7TkXk-atjht.txt
 
 $cat all_merged_urls.txt |jq '.[]|select(.duration<1800)'> all_merged_urls_lessthan30min.tx
 $cat vds_sem00rzDxEOarQFcS.json|jq '.[]|select(.duration<600)'

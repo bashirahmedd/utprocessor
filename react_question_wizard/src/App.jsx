@@ -14,7 +14,7 @@ function App() {
       "options": ["Islam", "Christianity", "Budhism"]
     },
     {
-      "q": "What is the name of your favourite food?",
+      "q": "What is the type of your favourite food?",
       "options": ["Meat", "Vegetable", "Fruit", "Spicy Snack"]
     }
   ]
