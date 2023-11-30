@@ -53,3 +53,7 @@ dkms.conf
 
 # Nodejs video download
 video_js_download/node_modules
+nodejs_extract_links/node_modules
+react_question_wizard/node_modules
+bashscriptexecutor/src/main/java/com/tbc/*.class
+bashscriptexecutor/target

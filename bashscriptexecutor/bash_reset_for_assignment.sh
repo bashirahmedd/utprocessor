@@ -1,7 +1,8 @@
 #!/bin/bash
 
-cd /home/naji/Downloads/StudentAssigments
+cd /home/naji/Downloads/StudentAssignments
 rm *.zip
+rm *.ZIP
 rm -r */
 rm *.html *.htm
 killall -9 code
