@@ -12,8 +12,8 @@ import java.util.Properties;
 
 public class BashScriptExecutor extends JFrame {
 
-    private int initW = 250;
-    private int initH = 100;
+    private int initW = 270;
+    private int initH = 70;
     private Properties properties;
 
     public static void main(String[] args) {
@@ -45,7 +45,7 @@ public class BashScriptExecutor extends JFrame {
         // Create buttons
         JButton resetBtn = new JButton("Reset");
         JButton unzipBtn = new JButton("Unzip");
-        JButton mergeAnsBtn = new JButton("Merge Answer");
+        JButton mergeAnsBtn = new JButton("Merge");
 
         // Add action listeners to the buttons
         resetBtn.addActionListener(new ActionListener() {
