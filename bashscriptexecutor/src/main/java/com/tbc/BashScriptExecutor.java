@@ -4,6 +4,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -15,12 +16,13 @@ import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 public class BashScriptExecutor extends JFrame {
 
     private int initW = 270;
-    private int initH = 70;
+    private int initH = 140;
     private Properties properties;
 
     public static void main(String[] args) {
@@ -82,10 +84,11 @@ public class BashScriptExecutor extends JFrame {
 
         // Create a panel and add buttons to it
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout());
+        panel.setLayout(new GridLayout(2, 3));
         panel.add(resetBtn);
         panel.add(unzipBtn);
         panel.add(mergeAnsBtn);
+        marksCounter(panel);
 
         // Add the panel to the frame
         add(panel);
@@ -143,5 +146,51 @@ public class BashScriptExecutor extends JFrame {
             maxy = Math.max(maxy, bounds.y + bounds.height);
         }
         return new Rectangle(minx, miny, maxx - minx, maxy - miny);
+    }
+
+    //Marks counter for task type assigments
+    private float currentNumber = 0;
+    JTextField numberField;
+
+    private void marksCounter(JPanel panel) {
+
+        // Create components
+        numberField = new JTextField(10);
+        numberField.setText(String.valueOf(currentNumber));
+        numberField.setEditable(false); // Make the field read-only
+
+        // Set font and alignment for the numberField
+        Font boldFont = new Font(numberField.getFont().getName(), Font.BOLD, 30);
+        numberField.setFont(boldFont);
+        numberField.setHorizontalAlignment(JTextField.CENTER);
+
+        JButton incrementButton = new JButton("+Incr");
+        JButton decrementButton = new JButton("-Decr");
+
+        // Add components to the frame
+        panel.add(numberField);
+        panel.add(incrementButton);
+        panel.add(decrementButton);
+
+        // Add a single action listener for both buttons
+        ActionListener buttonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == incrementButton) {
+                    currentNumber += 0.5;
+                } else if (e.getSource() == decrementButton) {
+                    if (currentNumber > 0) {
+                        currentNumber -= 0.5;
+                    }
+                }
+                updateNumberField();
+            }
+        };
+        incrementButton.addActionListener(buttonListener);
+        decrementButton.addActionListener(buttonListener);
+    }
+
+    private void updateNumberField() {
+        numberField.setText(String.valueOf(currentNumber));
     }
 }
