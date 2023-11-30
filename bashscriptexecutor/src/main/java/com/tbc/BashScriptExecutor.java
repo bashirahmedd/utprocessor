@@ -1,7 +1,9 @@
 package com.tbc;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -10,6 +12,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 public class BashScriptExecutor extends JFrame {
 
     private int initW = 270;
@@ -17,6 +24,7 @@ public class BashScriptExecutor extends JFrame {
     private Properties properties;
 
     public static void main(String[] args) {
+
         // Create an instance of the BashScriptExecutor class
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -47,27 +55,30 @@ public class BashScriptExecutor extends JFrame {
         JButton unzipBtn = new JButton("Unzip");
         JButton mergeAnsBtn = new JButton("Merge");
 
-        // Add action listeners to the buttons
-        resetBtn.addActionListener(new ActionListener() {
+        // Add a single ActionListener for all buttons
+        ActionListener buttonClickListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                executeBashScript(properties.getProperty("bash.reset"));
-            }
-        });
+                JButton clickedButton = (JButton) e.getSource();
 
-        unzipBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                executeBashScript(properties.getProperty("bash.unzip"));
-            }
-        });
+                // Disable the clicked button
+                clickedButton.setEnabled(false);
 
-        mergeAnsBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                executeBashScript(properties.getProperty("bash.merge_answers"));
+                // Get the script file path based on the button's action command
+                String scriptFileName = properties.getProperty(clickedButton.getActionCommand());
+                executeBashScript(scriptFileName, clickedButton);
             }
-        });
+        };
+
+        // Set the action command for each button
+        resetBtn.setActionCommand("bash.reset");
+        unzipBtn.setActionCommand("bash.unzip");
+        mergeAnsBtn.setActionCommand("bash.merge_answers");
+
+        // Add the common ActionListener to all buttons
+        resetBtn.addActionListener(buttonClickListener);
+        unzipBtn.addActionListener(buttonClickListener);
+        mergeAnsBtn.addActionListener(buttonClickListener);
 
         // Create a panel and add buttons to it
         JPanel panel = new JPanel();
@@ -87,7 +98,8 @@ public class BashScriptExecutor extends JFrame {
         setVisible(true);
     }
 
-    private void executeBashScript(String scriptFileName) {
+    private void executeBashScript(String scriptFileName, JButton button) {
+
         try {
             // Set the script file path
             String scriptFilePath = new File(scriptFileName).getAbsolutePath();
@@ -110,13 +122,17 @@ public class BashScriptExecutor extends JFrame {
 
             // Display the exit code
             System.out.println("Script exited with code: " + exitCode);
-
+            // Enable the button after script execution
+            button.setEnabled(true);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+            // Enable the button in case of an exception
+            button.setEnabled(true);
         }
     }
 
     private Rectangle getMaximumScreenBounds() {
+
         int minx = 0, miny = 0, maxx = 0, maxy = 0;
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         for (GraphicsDevice device : environment.getScreenDevices()) {

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd /home/naji/Downloads/StudentAssignments
+rm *.txt
 rm *.zip
 rm *.ZIP
 rm -r */
