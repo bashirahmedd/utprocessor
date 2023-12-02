@@ -1,7 +1,5 @@
 package com.tbc;
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 
@@ -35,6 +33,7 @@ public class BashScriptExecutor extends JFrame {
 
     private AppProperties appProperties;
     private JTextField numberField;
+    private MarksCounter marksCounter;
 
     public BashScriptExecutor() {
         
@@ -45,7 +44,7 @@ public class BashScriptExecutor extends JFrame {
         Properties properties = appProperties.getProperties();
         ScreenDetail screenDetail = new ScreenDetail();
         new ResetUnzipMerge(properties, this,  panel);
-        MarksCounter marksCounter = new MarksCounter(panel);
+        marksCounter = new MarksCounter(panel);
         numberField = marksCounter.getMarksField();
         
         setTitle("Bash Script Executor");
@@ -61,6 +60,7 @@ public class BashScriptExecutor extends JFrame {
     }
 
     public void updateNumberField(float currentNumber) {
+        marksCounter.setCurrentNumber(currentNumber);
         numberField.setText(String.valueOf(currentNumber));
     }
 }

@@ -34,12 +34,12 @@ public class ResetUnzipMerge {
                 JButton clickedButton = (JButton) e.getSource();
                 clickedButton.setEnabled(false);
 
-                String scriptFileName = properties.getProperty(clickedButton.getActionCommand());
-                executeBashScript(scriptFileName, clickedButton);
-
                 if (e.getSource() == resetBtn) {
                     parent.updateNumberField(0);
                 }
+
+                String scriptFileName = properties.getProperty(clickedButton.getActionCommand());
+                executeBashScript(scriptFileName, clickedButton);
             }
         };
 
@@ -59,6 +59,8 @@ public class ResetUnzipMerge {
     private void executeBashScript(String scriptFileName, JButton button) {
 
         try {
+            System.out.println("Executing :" + scriptFileName);
+            
             // Set the script file path
             String scriptFilePath = new File(scriptFileName).getAbsolutePath();
 

@@ -52,6 +52,9 @@ public class MarksCounter {
         numberField.setText(String.valueOf(currentNumber));
     }
 
+    public void setCurrentNumber(float num){
+        currentNumber=num;
+    }
     public JTextField getMarksField(){
         return numberField;
     }
