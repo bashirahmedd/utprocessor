@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.tbc.BashScriptExecutor;
@@ -35,7 +36,30 @@ public class ResetUnzipMerge {
                 clickedButton.setEnabled(false);
 
                 if (e.getSource() == resetBtn) {
+                    int result = JOptionPane.YES_OPTION;
+
+                    if (parent.getCurrentNumber() > 0) {
+
+                        // Display a confirmation dialog
+                        result = JOptionPane.showConfirmDialog(
+                                parent,
+                                "Do you want to proceed?",
+                                "Confirmation",
+                                JOptionPane.YES_NO_OPTION);
+
+                        if (result == JOptionPane.NO_OPTION) {
+                            ((JButton)e.getSource()).setEnabled(true);
+                            return;
+                        }
+                    }
                     parent.updateNumberField(0);
+                }
+
+                if (parent.getCurrentNumber() > 0) {
+                    if (e.getSource() == unzipBtn || e.getSource() == mergeAnsBtn) {
+                        ((JButton) e.getSource()).setEnabled(true);
+                        return; // don't execute script
+                    }
                 }
 
                 String scriptFileName = properties.getProperty(clickedButton.getActionCommand());
@@ -60,7 +84,7 @@ public class ResetUnzipMerge {
 
         try {
             System.out.println("Executing :" + scriptFileName);
-            
+
             // Set the script file path
             String scriptFilePath = new File(scriptFileName).getAbsolutePath();
 

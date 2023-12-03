@@ -7,10 +7,13 @@ cd "$directory_path"
 
 # Specify the output file
 output_file="merged_output.txt"
+touch "$output_file"
+truncate -s 0 "$output_file"
 
 # Use find to locate all text files in the directory and its subdirectories
-find "$directory_path" -type f -name "answer*.txt" | while read -r file; do
-
+# find "$directory_path" -type f -name "answer*.txt" | sort -t= -k3 | while read -r file; do
+find "$directory_path" -type f -name "answer*.txt" | sort | while read -r file; do
+    
     # Add two blank lines before echoing the file name
     echo -e "\n\n=== $file ===\n" >> "$output_file"
     
@@ -22,4 +25,3 @@ find "$directory_path" -type f -name "answer*.txt" | while read -r file; do
 done
 
 echo "Merging complete. Output saved to $output_file"
-

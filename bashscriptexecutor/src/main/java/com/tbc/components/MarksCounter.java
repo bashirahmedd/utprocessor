@@ -55,6 +55,11 @@ public class MarksCounter {
     public void setCurrentNumber(float num){
         currentNumber=num;
     }
+
+    public float getCurrentNumber(){
+        return currentNumber;
+    }
+
     public JTextField getMarksField(){
         return numberField;
     }

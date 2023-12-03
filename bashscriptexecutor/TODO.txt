@@ -1,0 +1,4 @@
+click on the reset should pop confirmation dialogue, if marks are more than 0.
+
+add a status bar at the bottom to show different messages to the user.
+
