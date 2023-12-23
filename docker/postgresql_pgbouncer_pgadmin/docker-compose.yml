@@ -1,0 +1,68 @@
+services:
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    restart: unless-stopped
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=10000"
+      - "-c"
+      - "shared_buffers=8GB"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    networks:
+      app_net:
+        ipv4_address: "192.168.5.2"
+    volumes:
+      - /mnt/d001/db/pg152:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pg@pg.pg
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "5050:80"
+    networks:
+      app_net:
+        ipv4_address: "192.168.5.3"
+
+  pgbouncer:
+    container_name: pgbouncer_container
+    image: bitnami/pgbouncer
+    restart: unless-stopped
+    environment:
+       - PGBOUNCER_AUTH_USER=postgres
+       - PGBOUNCER_MAX_CLIENT_CONN=100
+       - PGBOUNCER_POOL_MODE=session
+       - PGBOUNCER_PORT=6432
+       - PGBOUNCER_SET_DATABASE_PASSWORD=postgres
+       - PGBOUNCER_SET_DATABASE_USER=postgres
+       - PGBOUNCER_STATS_USERS=postgres
+       - POSTGRESQL_DATABASE=postgres
+       - POSTGRESQL_HOST=192.168.5.2
+       - POSTGRESQL_PASSWORD=postgres
+       - POSTGRESQL_USERNAME=postgres
+    ports:
+      - "6432:6432"
+    networks:
+      app_net:
+        ipv4_address: "192.168.5.4"
+    depends_on:
+      - postgres
+
+networks:
+  app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.5.0/24"
+          gateway: 192.168.5.1

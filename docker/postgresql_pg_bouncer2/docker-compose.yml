@@ -1,0 +1,54 @@
+version: "3.3"
+services:
+  
+  pg1:
+    image: docker.io/bitnami/postgresql:14
+    volumes:
+      - 'pg1_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_PASSWORD=password1
+      - POSTGRESQL_DATABASE=db1
+
+  pg2:
+    image: docker.io/bitnami/postgresql:15
+    volumes:
+      - 'pg2_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_PASSWORD=password2
+      - POSTGRESQL_DATABASE=db2
+
+  pg3:
+    image: docker.io/bitnami/postgresql:14
+    volumes:
+      - 'pg3_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_PASSWORD=password3
+      - POSTGRESQL_DATABASE=db3
+
+  pgbouncer:
+    image: docker.io/bitnami/pgbouncer:1
+    ports:
+      - 6432:6432
+    volumes:
+      - './userlists.txt:/bitnami/userlists.txt'
+    environment:
+      - POSTGRESQL_HOST=pg1
+      - POSTGRESQL_PASSWORD=password1
+      - POSTGRESQL_DATABASE=db1
+      - PGBOUNCER_AUTH_TYPE=trust
+      - PGBOUNCER_USERLIST_FILE=/bitnami/userlists.txt
+      - PGBOUNCER_DSN_0=pg1=host=pg1 port=5432 dbname=db1
+      - PGBOUNCER_DSN_1=pg2=host=pg2 port=5432 dbname=db2
+      - PGBOUNCER_DSN_2=pg3=host=pg3 port=5432 dbname=db3
+    depends_on:
+      - pg1
+      - pg2
+      - pg3
+      
+volumes:
+  pg1_data:
+    driver: local
+  pg2_data:
+    driver: local
+  pg3_data:
+    driver: local

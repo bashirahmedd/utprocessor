@@ -1,0 +1,35 @@
+version: "3.3"
+services:
+  # psql -U postgres
+  # docker inspect to take ip address of the server "IPAddress": "172.19.0.2"
+  postgres_db:
+    image: postgres
+    container_name: PostgresDB
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: test_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+
+  #takes some time http://localhost:5050
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    # login/password for pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres_db
+    # volumes:
+    #   - pgadmin:/pgadmin4/servers.json
+
+volumes:
+  postgres_db:
