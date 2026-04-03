@@ -5,3 +5,6 @@ utprocessor 0.1, Initial upload 02-02-2022
 is to append future dowload ids. Further the running download process append failed ids to the this file to download again in the next iteration. 
 
 https://github.com/ytdl-org/youtube-dl
+
+# using yt-dlp instead of youtube-dl
+$yt-dlp --simulate -F "https://www.youtube.com/watch?v=aqz-KE-bpKQ"

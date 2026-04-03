@@ -13,6 +13,11 @@ source ./include/script_util.sh
 batch="$1"
 fn_say "Loading Batch # ""$batch"
 
+# Dependency Check: Check for JS runtime required by yt-dlp
+if ! command -v node &> /dev/null && ! command -v deno &> /dev/null; then
+   fn_say "Warning: No JavaScript runtime (node/deno) detected. Downloads may be slow or fail."
+fi
+
 # vars for new download
 counter=`date +%s`
 in_video_list="./input/""$batch""_video_id.txt"                 # ids are loaded here
@@ -63,9 +68,12 @@ while : ; do
         in_file="https://www.youtube.com/watch?v="$line
 
         #youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
-        youtube-dl -F "$line"|grep -E '^(18|17|22)'
+        #youtube-dl -F "$line"|grep -E '^(18|17|22)'
+        yt-dlp -F "$line"|grep -E '^(18|17|22)'
+        yt-dlp --no-warnings -F "$line" 2>/dev/null | grep -E '^(18|17|22)'
         #youtube-dl --no-mtime -r 4.2M -c -f 22/18/17 -o $out_file $in_file
-        youtube-dl --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
+        #youtube-dl --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
+        yt-dlp --js-runtimes "deno:/home/naji/.deno/bin/deno" --remote-components "ejs:npm" --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
 
         if [[ $? -ne 0 ]];then
             echo "failed: $line"

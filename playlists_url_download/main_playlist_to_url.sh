@@ -8,7 +8,7 @@ playlists_urls='./input/playlists_urls.txt'
 #target='./ytdown/'
 filelines=`cat $playlists_urls`
 #filelines=`head -1 $playlists_urls`
-#echo $filelines
+echo $filelines
 #startNum=`date +%s`
 counter=`date +%s`
 inc=1 
@@ -30,11 +30,12 @@ for line in $filelines;do
     #youtube-dl -f 'best[ext=mp4]+best[height<=480]/best' -o $target$outputFile $line
     #youtube-dl -f 22/18/17 -o $target$outputFile $line
     #youtube-dl -j --flat-playlist $line | jq -r '.id' | sed 's_^_https://www.youtube.com/watch?v=_' >> $outputFile  
-    echo $line
+    echo $base_url$line
     echo 'Output = '$outputFile
     #output ids only
     #youtube-dl -j --flat-playlist $base_url$line | jq -r '.id' >> $outputFile".txt"
-    youtube-dl -j --flat-playlist $base_url$line | jq '.' > $outputFile".json"
+    #youtube-dl -j --flat-playlist $base_url$line | jq '.' > $outputFile".json"
+    yt-dlp -j --flat-playlist $base_url$line | jq '.' > $outputFile".json"
 
     if [ ! -s $outputFile".json" ]
       then

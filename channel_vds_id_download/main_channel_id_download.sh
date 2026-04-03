@@ -32,7 +32,8 @@ for line in $filelines;do
     #youtube-dl -j --flat-playlist $line | jq -r '.id' | sed 's_^_https://www.youtube.com/watch?v=_' >> $outputFile  
     echo $line
     echo 'Output = '$outputFile
-    youtube-dl -j --flat-playlist $base_url$line"/videos" | jq -r '.url' >> $outputFile
+    #youtube-dl -j --flat-playlist $base_url$line"/videos" | jq -r '.url' >> $outputFile
+    yt-dlp -j --flat-playlist $base_url$line"/videos" | jq -r '.url' >> $outputFile
     if [ ! -s $outputFile ]
       then
         echo "failed: $line"
