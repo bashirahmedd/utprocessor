@@ -13,7 +13,9 @@ echo $filelines
 counter=`date +%s`
 inc=1 
 #startNum=$(($(date +'%s * 1000 + %-N / 1000000')))
-base_url='https://www.youtube.com/watch?list='
+#base_url='https://www.youtube.com/watch?list='
+base_url='https://www.youtube.com/playlist?list='
+
 
 for line in $filelines;do
 
