@@ -9,6 +9,10 @@ source ./include/script_signal.sh
 session_dl_sz=0
 source ./include/script_util.sh
 
+#activate virtual env for yt-dlp 
+source ~/yt-dlp/bin/activate                
+yt-dlp --version
+
 #args
 batch="$1"
 fn_say "Loading Batch # ""$batch"
@@ -73,8 +77,6 @@ while : ; do
         yt-dlp --no-warnings -F "$line" 2>/dev/null | grep -E '^(18|17|22)'
         #youtube-dl --no-mtime -r 4.2M -c -f 22/18/17 -o $out_file $in_file
         #youtube-dl --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
-        source ~/yt-dlp/bin/activate
-        yt-dlp --version
         #yt-dlp --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
         yt-dlp --js-runtimes "deno:/home/naji/.deno/bin/deno" --remote-components "ejs:npm" --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
 
