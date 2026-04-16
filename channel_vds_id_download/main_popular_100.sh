@@ -4,6 +4,12 @@
 next_iteration='./input/next_iteration.txt'                 #must be empty file in start
 #rm try_urls_again.txt
 channel_urls='./input/channel_urls.txt'
+
+#activate virtual env for yt-dlp 
+source ~/yt-dlp/bin/activate                
+yt_version=`yt-dlp --version`
+echo "yt-dlp version available: "$yt_version
+
 #cptobase='/home/bashir/Downloads'
 #target='./ytdown/'
 filelines=`cat $channel_urls`

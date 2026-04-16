@@ -11,7 +11,8 @@ source ./include/script_util.sh
 
 #activate virtual env for yt-dlp 
 source ~/yt-dlp/bin/activate                
-yt-dlp --version
+yt_version=`yt-dlp --version`
+fn_say "yt-dlp version available: "$yt_version
 
 #args
 batch="$1"

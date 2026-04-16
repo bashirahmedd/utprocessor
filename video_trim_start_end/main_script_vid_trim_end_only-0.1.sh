@@ -35,13 +35,16 @@ for f in *.mp4; do
     
     # 2. Calculate the stop point (Duration - 10s)
     # Using 'bc' for floating point math: T_stop = duration - 10
-    t_stop=$(echo "$duration - 60" | bc)
+    t_stop=$(echo "$duration - 2" | bc)
     
     # 3. Trim from 6s to the calculated stop point
     # We re-encode audio (-c:a aac) to ensure sync at both cut points
     # ffmpeg -ss 00:00:06 -to "$t_stop" -i "$f" -c:v copy -c:a aac -b:a 192k "trimmed_videos/${f%.mp4}_trimmed.mp4"
 
-    ffmpeg -ss 00:00:10 -to "$t_stop" -i "$f" -c:v copy -c:a aac -b:a 64k -ar 22050 "trimmed_videos/${f%.mp4}_trimmed.mp4"
+    #ffmpeg -ss 00:00:06 -to "$t_stop" -i "$f" -c:v copy -c:a aac -b:a 64k -ar 22050 "trimmed_videos/${f%.mp4}_trimmed.mp4"
+
+    ffmpeg -i "$f" -to "$t_stop" -c:v copy -c:a aac -b:a 64k -ar 22050 "trimmed_videos/${f%.mp4}_trimmed.mp4"
+
 done
 
 echo "Done."
