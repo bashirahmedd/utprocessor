@@ -13,7 +13,7 @@ for f in *.mp4; do
     echo "Processing $filename"
 
     # -b:a 64k sets a low bitrate to save space
-    ffmpeg -ss 00:00:08  -i "$f" -c:v copy -c:a aac -b:a 64k "trimmed_videos/${f%.mp4}_trimmed.mp4"
+    ffmpeg -ss 00:00:46  -i "$f" -c:v copy -c:a aac -b:a 64k "trimmed_videos/${f%.mp4}_trimmed.mp4"
 
 done
 
