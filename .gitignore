@@ -64,3 +64,13 @@ bashscriptexecutor/target
 # pinterest image download 
 pinterest_image_download/.venv_pinterest
 pinterest_image_download/images
+pinterest_image_download/.agents
+pinterest_image_download/__pycache__
+
+#playwright pinterest download images
+pinterest_image_playwright_download/.auth
+pinterest_image_playwright_download/images
+pinterest_image_playwright_download/__pycache__
+pinterest_image_playwright_download/.venv
+pinterest_image_playwright_download/.codex
+pinterest_image_playwright_download/.agents

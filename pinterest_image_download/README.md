@@ -45,6 +45,13 @@ Download media from a Pinterest URL:
 python main.py scrape "https://www.pinterest.com/pin/example/" -n 30 -o images
 ```
 
+Pinterest visual-search URLs are handled with Pinterest's visual-search feed, not the
+generic related-pin feed:
+
+```bash
+python main.py scrape "https://ca.pinterest.com/pin/880242690195915263/visual-search/?cropSource=5&entrypoint=closeup_cta" -n 30 -o images
+```
+
 Download media from Pinterest search results:
 
 ```bash
@@ -60,5 +67,7 @@ python main.py search "landscape art" -n 30 -o images
 ## Notes
 
 - Use real, public Pinterest URLs for scraping.
+- Visual-search URLs without `x`, `y`, `w`, and `h` crop parameters use the full
+  image crop (`x=0`, `y=0`, `w=1`, `h=1`).
 - Downloaded files are saved to the output directory you choose.
 - This project uses the third-party `pinterest-dl` package and is not affiliated with Pinterest.
