@@ -18,7 +18,6 @@ DEFAULT_AUTH_STATE_PATH = Path(".auth") / "pinterest_auth.json"
 DEFAULT_IMAGES_DIR = Path("images")
 PIN_PATH_RE = re.compile(r"/pin/(\d+)/?")
 
-
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Scrape Pinterest visual-search pin links from anchor hrefs."

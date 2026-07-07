@@ -28,6 +28,7 @@ counter=`date +%s`
 in_video_list="./input/""$batch""_video_id.txt"                 # ids are loaded here
 try_again_video_list="./input/""$batch""_next_iteration.txt"    # must be empty file in start
 backup_id="./log/""$counter""_backup_video_id.log"   # overwrite this file
+skipped_video_list="./log/""$counter""_skipped_video_id.log"
 separator="-----------------------------"
 
 # validate state
@@ -49,12 +50,16 @@ target='/home/naji/Downloads/temp/ytdown/'
 inc=1 
 filelines=`cat $in_video_list`
 task_tot=`cat $in_video_list|wc -l`
+skipped_video_count=0
 
 slp_val="$((60*5))"       # in sec
 slp_inc=60                # increment by 60 sec
+max_video_duration_minutes=35
+max_video_duration_seconds="$(($max_video_duration_minutes*60))"
 
 fn_say "Starting download of "$task_tot" tasks."
 echo "$separator"
+
 while : ; do
     # process a given download 
     task_num=1
@@ -72,23 +77,34 @@ while : ; do
         out_file=$target"%(title)s_%(uploader)s_"$line".%(ext)s"
         in_file="https://www.youtube.com/watch?v="$line
 
-        #youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
-        #youtube-dl -F "$line"|grep -E '^(18|17|22)'
-        yt-dlp -F "$line"|grep -E '^(18|17|22)'
-        yt-dlp --no-warnings -F "$line" 2>/dev/null | grep -E '^(18|17|22)'
-        #youtube-dl --no-mtime -r 4.2M -c -f 22/18/17 -o $out_file $in_file
-        #youtube-dl --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
-        #yt-dlp --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
-        yt-dlp --js-runtimes "deno:/home/naji/.deno/bin/deno" --remote-components "ejs:npm" --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
+        # yt-dlp reports duration in seconds.
+        video_duration_seconds=`yt-dlp --no-warnings --print "%(duration)s" "$in_file" 2>/dev/null`
 
-        if [[ $? -ne 0 ]];then
-            echo "failed: $line"
-            echo $line >>  $try_again_video_list
-            fn_say "Unfortunately! task "$task_num" out of "$task_tot" has failed."            
+        if [[ "$video_duration_seconds" =~ ^[0-9]+$ && "$video_duration_seconds" -gt "$max_video_duration_seconds" ]];then
+            video_duration_minutes="$((($video_duration_seconds+59)/60))"
+            echo "skipped: $line ($video_duration_minutes minutes, limit is $max_video_duration_minutes minutes)"
+            echo "$line" >> "$skipped_video_list"
+            skipped_video_count="$(($skipped_video_count+1))"
+            fn_say "Skipping task "$task_num" out of "$task_tot" because it is longer than "$max_video_duration_minutes" minutes."
         else
-            fn_process_fsize "$in_file" 
-            echo "success: $line"
-            fn_say "Hooray! task "$task_num" out of "$task_tot" is successful." 
+            #youtube-dl --no-mtime -f 22/18/17 -o $out_file $in_file
+            #youtube-dl -F "$line"|grep -E '^(18|17|22)'
+            yt-dlp -F "$line"|grep -E '^(18|17|22)'
+            yt-dlp --no-warnings -F "$line" 2>/dev/null | grep -E '^(18|17|22)'
+            #youtube-dl --no-mtime -r 4.2M -c -f 22/18/17 -o $out_file $in_file
+            #youtube-dl --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
+            #yt-dlp --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
+            yt-dlp --js-runtimes "deno:/home/naji/.deno/bin/deno" --remote-components "ejs:npm" --no-mtime -r 4.2M -c -f 18/17/22 -o $out_file $in_file
+
+            if [[ $? -ne 0 ]];then
+                echo "failed: $line"
+                echo $line >>  $try_again_video_list
+                fn_say "Unfortunately! task "$task_num" out of "$task_tot" has failed."            
+            else
+                fn_process_fsize "$in_file" 
+                echo "success: $line"
+                fn_say "Hooray! task "$task_num" out of "$task_tot" is successful. Skipped videos so far: "$skipped_video_count"." 
+            fi
         fi
         sed -i '1d' "$in_video_list" 
         counter="$(($counter+$inc))"
@@ -125,6 +141,12 @@ done
 rename 's/:/_/g' "$target""*.mp4"
 
 fn_say "Validating downloads"
-fn_validate_file "$target" "$backup_id" 
-fn_say "Given batch is downloaded successfully."
 
+# Skipped videos are intentional, so they should not fail validation.
+validate_id="$backup_id"
+if [[ -s "$skipped_video_list" ]];then
+    validate_id="./log/""$counter""_expected_download_id.log"
+    grep -Fvx -f "$skipped_video_list" "$backup_id" > "$validate_id"
+fi
+fn_validate_file "$target" "$validate_id" 
+fn_say "Given batch is downloaded successfully."

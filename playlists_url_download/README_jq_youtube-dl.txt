@@ -38,7 +38,7 @@ to get all ids of the videos
 $jq -r '.[]|.id' PLI6jYYEI0TDqmDJv8zG9Zg7TkXk-atjht.json
 
 most used command to get IDs
-$jq -r '.[]|.id' PL6um4JyGrH5rGBeDWAyvIURc777RwP-xf.json >> PL6um4JyGrH5rGBeDWAyvIURc777RwP-xf.txt
+jq -r '.[]|.id' playlists_url_PLF06QSQtcR4dCcXMRpwcJazvrty26yJ8S.json >> PLF06QSQtcR4dCcXMRpwcJazvrty26yJ8S.txt
 
 $cat all_merged_urls.txt |jq '.[]|select(.duration<1800)'> all_merged_urls_lessthan30min.tx
 $cat vds_sem00rzDxEOarQFcS.json|jq '.[]|select(.duration<600)'

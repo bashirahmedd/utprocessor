@@ -8,3 +8,8 @@ https://github.com/ytdl-org/youtube-dl
 
 # using yt-dlp instead of youtube-dl
 $yt-dlp --simulate -F "https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+
+
+# install shellcheck on ubuntu
+$ apt install shellcheck
+$ shellcheck --version

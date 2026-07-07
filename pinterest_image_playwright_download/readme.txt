@@ -40,5 +40,5 @@ Use a different Pinterest search URL:
 
 ```bash
 .venv/bin/python main.py "https://ca.pinterest.com/search/pins/?q=grade%201%20english%20worksheets%20for%20kids%20cvc&rs=ac&len=30&source_id=ac_UFnsME8q&eq=grade%201%20english%20worksheets%20for&etslf=11959"  --limit 1 --download-images --images-dir images --output data.csv
-.venv/bin/python main.py "PASTE_PINTEREST_SEARCH_URL_HERE"  --limit 1 --download-images --images-dir images --output data.csv
+.venv/bin/python main.py "PASTE_PINTEREST_SEARCH_URL_HERE"  --limit 50 --download-images --images-dir images --output data.csv
 ```
