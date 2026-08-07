@@ -37,7 +37,7 @@ $jq -r '.[]|select(.duration<600)|.id' test.json >> batch1.txt
 to get all ids of the videos
 $jq -r '.[]|.id' PLI6jYYEI0TDqmDJv8zG9Zg7TkXk-atjht.json
 
-most used command to get IDs
+MOSTLY used command to get IDs
 jq -r '.[]|.id' playlists_url_PLF06QSQtcR4dCcXMRpwcJazvrty26yJ8S.json >> PLF06QSQtcR4dCcXMRpwcJazvrty26yJ8S.txt
 
 $cat all_merged_urls.txt |jq '.[]|select(.duration<1800)'> all_merged_urls_lessthan30min.tx
@@ -53,3 +53,6 @@ $cat vds_sem00rzDxEOarQFcS_lessthan10min.json |jq '.[]|.id+"\t"+.title' >  vds_s
 
 detailed information on each episode of the playlist
 $ youtube-dl --no-call-home --dump-json https://www.youtube.com/playlist?list=PLI6jYYEI0TDosbAsew3Iauk6n_lCqXjAb | jq >> test.json
+
+
+PLP-kK_U8VkgM.json
